@@ -1,6 +1,6 @@
 # Are the assets yours?
 Of course not. *(I wish they were)*  
-The font was taken by the awesome Mega Drive C compiler SGDK: https://github.com/Stephane-D/SGDK/blob/master/res/image/font_default.png
+The font was taken by the awesome Mega Drive C compiler SGDK: https://github.com/Stephane-D/SGDK/blob/master/res/image/font_default.png  
 The font asset for the VDP's format was converted using this: https://github.com/Durobot/gimp-megadrive-generate-all-colors
 
 ### Can I use this?
