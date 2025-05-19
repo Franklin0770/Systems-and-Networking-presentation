@@ -25,7 +25,6 @@ Vectors:
 		dc.l GenericError		; Unused (reserved)
 		dc.l GenericError		; Unused (reserved)
 		dc.l GenericError		; Unused (reserved)
-		dc.l GenericError		; Unused (reserved
 		dc.l GenericError		; Unused (reserved)
 		dc.l GenericError		; Unused (reserved)
 		dc.l GenericError		; Unused (reserved)
@@ -33,7 +32,8 @@ Vectors:
 		dc.l GenericError		; Unused (reserved)
 		dc.l GenericError		; Unused (reserved)
 		dc.l GenericError		; Unused (reserved)
-		dc.l GenericError		; Unused (reserved
+		dc.l GenericError		; Unused (reserved)
+		dc.l GenericError		; Unused (reserved)
 		dc.l SpuriousException	; Spurious exception						($C)
 		dc.l GenericError		; IRQ level 1
 		dc.l GenericError		; IRQ level 2
