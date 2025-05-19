@@ -1,4 +1,4 @@
-; Decleration of text
+; Declaration of text
 Strings:
 
 	String0: 	dfntxt "Systems Presentation: 68k vs x86"
@@ -152,7 +152,7 @@ Strings:
 	Code3:	dfntxt "(DIVISIONBYZERO_EXCEPTION)"
 	Code4:	dfntxt "(CHECK_EXCEPTION)"
 	Code5:	dfntxt "(TRAPV_EXCEPTION)"
-	Code6:	dfntxt "(PRIVILEDGE_VIOLATION)"
+	Code6:	dfntxt "(PRIVILEGE_VIOLATION)"
 	Code7:	dfntxt "(TRACE_EXCEPTION)"
 	Code8:	dfntxt "(LINE1010_EMU)"
 	Code9:	dfntxt "(LINE1111_EMU)"
@@ -165,6 +165,6 @@ Codes_End
 
 	Message5:	dfntxt "Registers dump:"
 	
-	dc.b	$FF
+	dc.b	$FF	; padding
 
 Strings_End

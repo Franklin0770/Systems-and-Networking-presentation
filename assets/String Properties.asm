@@ -4,7 +4,10 @@
 ; Presentation strings
 ; ------------------------
 
-Slide0:	dc.w	$FFFF
+; Why are the terminators words and not bytes? Because the byte format doesn't always align correctly
+; (this makes the code more efficient, too, since .b and .w instructions require the same amount of cycles)
+
+Slide0:	dc.w	$FFFF	; This is a terminator which will get hit by .find_terminator
 ;-------------------------
 	dc.w	String0
 	VRAMCoordinates	0,0

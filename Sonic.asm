@@ -9,7 +9,8 @@
 	org 0
 	
 ROM_Start:																	; Error codes ($AAxx)
-Vectors:	dc.l SYS_STACK		; Initial stack pointer value (SP value)
+Vectors:
+		dc.l SYS_STACK		; Initial stack pointer value (SP value)
 		dc.l EntryPoint			; Start of program (PC value)
 		dc.l BusError			; Bus error									($2)
 		dc.l AddressError		; Address error 							($3)
@@ -77,9 +78,9 @@ Vectors:	dc.l SYS_STACK		; Initial stack pointer value (SP value)
 Header_Start:
 		dc.b "SEGA MEGA DRIVE",$20					; "$20" is padding
 		dc.b "(C)BRO0 2024.OCT"						; Copyright(-ish), release year and month
-		dc.b "Presentazione sistemi: 68k e x86"		; Domestic name
+		dc.b "Presentazione sistemi: 68k e x86"		; Domestic name (it's Italian I know)
 		dc.b "                "						; padding
-		dc.b "Presentazione sistemi: 68k e x86"		; Overseas name
+		dc.b "Presentazione sistemi: 68k e x86"		; Overseas name (in Italian as well)
 		dc.b "                "						; padding
 		dc.b "AI-23456786-00"						; Serial number (I mashed the keyboard for this)
 		dc.w $0000									; Empty checksum
@@ -89,8 +90,8 @@ Header_Start:
 		dc.l ROM_End								; End address of ROM
 		dc.l $FF0000								; Start address of WRAM
 		dc.l $FFFFFF 								; End address of WRAM
-		dc.b "                                                                "
-		dc.b "E  "									; Region support
+		dc.b "                                                                " ; more padding
+		dc.b "E  "									; Region support (PAL only)
 		dc.b "             "						; padding for reserved space
 
 BusError:
@@ -501,7 +502,8 @@ GetJoypad:
 	move.b	(a3),d6	; put control state somewhere
 	rts
 
-; entry point
+; This portion of code was meant to change slide only by pressing the button once (not by holding, effectively avoiding debouncing).
+; This is unnecessary, because the animation is slow enough to prevent accidental slide changes
 ;PressWait: 
 ;.press_wait:
 ;	stop	#$2500	; wait until next frame (can't make a frame-perfect press)
@@ -545,7 +547,7 @@ RedrawSlide:
 NextString:
 	cmpa.w	#Slide8+6,a4	; is the boundary limit to avoid going outside the slides being hit?
 	bhs.s	WaitNextFrame	; if yes, do nothing
-	;addq.w	#6,a4			; already done by UpdateStringProperties
+	;addq.w	#6,a4			already done by UpdateStringProperties
 	
 ; ---------------------------------------------------------------------------
 ; Subroutine to	draw text on screen (a4: string pointer)
@@ -582,7 +584,7 @@ SkipTerminator:
 	move.w	6(a4),d0		; update d0, skipping the terminator
 	bra.s	Continue
 	
-; skips directly to first or last relevant slide
+; Skips directly to first or last relevant slide using the $FFFF terminators
 NextSlide:
 	cmpa.w	#Slide8+6,a4	; is the boundary limit to avoid going outside the slides being hit?
 	bhs.w	WaitNextFrame	; if yes, do nothing
