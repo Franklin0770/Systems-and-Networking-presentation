@@ -2,7 +2,7 @@
 	
 	supmode on	; We don't need warnings about privileged instructions
 	
-	include "ComplierMacros.asm"
+	;include "ComplierMacros.asm" unused
 	include "MegaDriveMacros.asm"
 	include "Constants.asm"
 
@@ -10,7 +10,7 @@
 	
 ROM_Start:																	; Error codes ($AAxx)
 Vectors:
-		dc.l SYS_STACK		; Initial stack pointer value (SP value)
+		dc.l SYS_STACK			; Initial stack pointer value (SP value)
 		dc.l EntryPoint			; Start of program (PC value)
 		dc.l BusError			; Bus error									($2)
 		dc.l AddressError		; Address error 							($3)
@@ -90,7 +90,7 @@ Header_Start:
 		dc.l ROM_End								; End address of ROM
 		dc.l $FF0000								; Start address of WRAM
 		dc.l $FFFFFF 								; End address of WRAM
-		dc.b "                                                                " ; more padding
+		dc.b "                                                                "	; more padding
 		dc.b "E  "									; Region support (PAL only)
 		dc.b "             "						; padding for reserved space
 
@@ -199,7 +199,7 @@ CPU_ClearScreen:
 	move.l	d1,(a1)		; clear portion of screen by setting the background tiles
 	move.w	d3,d2		; update the slow down timer for CPU_Wait
 	bsr.w	CPU_Wait	; make the slow down effect
-	dbf d0,.clear_screen	; keep clearing until done
+	dbf d0,.clear_screen; keep clearing until done
 	
 	move.w	#$2FFF,d2	; update the slow down timer
 	bsr.w	CPU_Wait	; a bit of lag
@@ -296,7 +296,7 @@ PrintTextCode
 	
 PrintRegisterDump
 .print_message:
-	lea	Message5,a3	; points to the string address directly
+	lea	Message5,a3		; points to the string address directly
 	moveq	#15-1,d0	; this string is 15 characters long
 	move.l	#vdpCoordinates(0,10),(a0)
 	move.w	#$AFF,d3	; update the slow down timer for VDP_PrintText
@@ -307,8 +307,8 @@ PrintRegisterDump
 	moveq	#8-1,d0		; 8 registers to write
 	moveq	#8-1,d6		; 8 digits to print
 	moveq	#0,d5
-	lea	(REG_PREFIXES+10),a2	; start from this point to write down the prefixes
-	lea REG_DUMP,a3		; load register dump pointer
+	lea	(REG_PREFIXES+10),a2; start from this point to write down the prefixes
+	lea REG_DUMP,a3			; load register dump pointer
 	; write the prefixes in RAM in opposite order
 	move.l	#chars('0','x'),-(a2)
 	move.w	#char(':'),-(a2)
@@ -372,7 +372,7 @@ PrintRegisterDump
 	bhi.s	.print_sr			; if yes, print the status register
 	moveq	#1-1,d0				; 1 register to write
 	moveq	#8-1,d6				; 8 digits to print
-	move.l	#chars('s','p'),(a2)	; use "sp" prefix
+	move.l	#chars('s','p'),(a2); use "sp" prefix
 	bra.w	.print_registers	; print sp
 	
 .print_sr:

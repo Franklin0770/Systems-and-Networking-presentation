@@ -1,0 +1,18 @@
+{
+	"cSpell.words": [
+		"andi",
+		"cmpa",
+		"cmpi",
+		"movea",
+		"movem",
+		"VSRAM"
+	],
+	"cSpell.ignoreWords": [
+		"bswap",
+		"dfntxt",
+		"ODITSZAPC",
+		"XNZVC",
+		"DMALEN",
+		"DMASRC"
+	]
+}

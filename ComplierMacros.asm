@@ -1,9 +1,11 @@
-	padding off	; We don't want AS padding out dc.b instructions
-	listing purecode	; Want listing file, but only the final code in expanded macros
-	page	0	; Don't want form feeds
+; Taken from the Sonic Retro's Sonic 1 disassembly on GitHub (unused)
+	
+	padding off		; We don't want AS padding out dc.b instructions
+	listing purecode; We sure want the listing file, but only the final code in expanded macros
+	page	0		; Don't want form feeds
 	
 notZ80 function cpu,(cpu<>128)&&(cpu<>32988) ; define notZ80 function
-	
+
 ; make org safer (impossible to overwrite previously assembled bytes)
 ; and also make it work in Z80 code without creating a new segment
 org macro address

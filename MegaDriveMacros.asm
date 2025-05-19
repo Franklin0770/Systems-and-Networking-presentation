@@ -15,6 +15,7 @@ i	set i + 1
 
 ; ---------------------------------------------------------------------------
 ; Macros to set VDP memory addresses, spaces and to build DMA commands
+; Taken from flamewing's Mega Drive DMA macros on GitHub
 ; ---------------------------------------------------------------------------
 
 vdpCommand function address,type,((address&$3FFF)<<16)|((address&$C000)>>14)|(type)
