@@ -8,11 +8,12 @@
 		"VSRAM"
 	],
 	"cSpell.ignoreWords": [
-		"bswap",
-		"dfntxt",
+		"DIVISIONBYZERO",
+		"DMALEN",
+		"DMASRC",
 		"ODITSZAPC",
 		"XNZVC",
-		"DMALEN",
-		"DMASRC"
+		"bswap",
+		"dfntxt"
 	]
 }
