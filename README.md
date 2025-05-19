@@ -1,10 +1,12 @@
 # Are the assets yours?
 Of course not. *(I wish they were)*  
 The font was taken by the awesome Mega Drive C compiler SGDK: https://github.com/Stephane-D/SGDK/blob/master/res/image/font_default.png  
-The font asset for the VDP's format was converted using this: https://github.com/Durobot/gimp-megadrive-generate-all-colors
+The font asset for the VDP's format was converted using this: https://github.com/Durobot/gimp-megadrive-generate-all-colors  
+Additionally, some complier macros were taken from Sonic Retro's Sonic 1 disassembly: https://github.com/sonicretro/s1disasm/blob/AS/MacroSetup.asm  
+This repository is where the DMA macros were taken from: https://gist.github.com/flamewing/ac4b8586f74c74fe24fe30e5e0261fb0
 
 ### Can I use this?
-Yes, you can, but please, let me know first (you don't have to ask)!
+Yes, you can, but please just let me know first (you don't have to ask)!
 
 ### And how?
 In order to build the ROM, you can use my VS Code extension: [still have to upload the repository]
