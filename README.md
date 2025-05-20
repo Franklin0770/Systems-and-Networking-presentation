@@ -3,15 +3,14 @@ Of course not. *(I wish they were)*
 The font was taken by the awesome Mega Drive C compiler SGDK: https://github.com/Stephane-D/SGDK/blob/master/res/image/font_default.png  
 The font asset for the VDP's format was converted using this: https://github.com/Durobot/gimp-megadrive-generate-all-colors  
 Additionally, some complier macros were taken from Sonic Retro's Sonic 1 disassembly: https://github.com/sonicretro/s1disasm/blob/AS/MacroSetup.asm  
-This repository is where the DMA macros were taken from: https://gist.github.com/flamewing/ac4b8586f74c74fe24fe30e5e0261fb0
+This repository is where the DMA macros were taken from: https://gist.github.com/flamewing/ac4b8586f74c74fe24fe30e5e0261fb0  
 
 The unused assets were made by me (you can humiliate me)! If only the converter had tile optimization as a feature...
-
 ### Can I use this?
 Yes, you can, but please just let me know first (you don't have to ask)!
 
 ### And how?
-In order to build the ROM, you can use my VS Code extension: [still have to upload the repository]
+In order to build the ROM, you can use my [Visual Studio Code extension](https://github.com/Franklin0770/megaenvironment)
 
 ## Can you provide the lore?
 With the courtesy of my Systems and Networks teacher, I created in two weeks this presentation **for PAL Mega Drive systems only** (for the taller resolution, useful for showing more content in screen).  
