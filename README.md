@@ -5,6 +5,8 @@ The font asset for the VDP's format was converted using this: https://github.com
 Additionally, some complier macros were taken from Sonic Retro's Sonic 1 disassembly: https://github.com/sonicretro/s1disasm/blob/AS/MacroSetup.asm  
 This repository is where the DMA macros were taken from: https://gist.github.com/flamewing/ac4b8586f74c74fe24fe30e5e0261fb0
 
+The unused assets were made by me (you can humiliate me)! If only the converter had tile optimization as a feature...
+
 ### Can I use this?
 Yes, you can, but please just let me know first (you don't have to ask)!
 
