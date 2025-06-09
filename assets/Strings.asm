@@ -164,7 +164,5 @@ Strings:
 Codes_End
 
 	Message5:	dfntxt "Registers dump:"
-	
-	dc.b	$FF	; padding
 
 Strings_End

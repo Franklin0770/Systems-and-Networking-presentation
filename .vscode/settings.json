@@ -15,5 +15,7 @@
 		"XNZVC",
 		"bswap",
 		"dfntxt"
-	]
+	],
+	"megaenvironment.variablesFileName": "",
+	"megaenvironment.fillValue": "FF"
 }

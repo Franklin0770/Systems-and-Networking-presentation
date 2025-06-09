@@ -1,6 +1,8 @@
 	cpu 68000
 	
 	supmode on	; We don't need warnings about privileged instructions
+
+	listing purecode
 	
 	;include "ComplierMacros.asm" unused
 	include "MegaDriveMacros.asm"
@@ -421,11 +423,11 @@ VDP_VBlankInt:
 
 ; Assets section
 
-PAT_BodyFont: include "assets\Body Font.asm"
+PAT_BodyFont: include "assets/Body Font.asm"
 
-STR_Strings: include "assets\Strings.asm"
+STR_Strings: include "assets/Strings.asm"
 
-STR_Properties: include "assets\String Properties.asm"
+STR_Properties: include "assets/String Properties.asm"
 
 ;=================================================================================
 
