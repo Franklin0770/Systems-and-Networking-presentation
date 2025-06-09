@@ -21,9 +21,9 @@ Extremely well. The explanation was a bit too fast, but an hour of lesson isn't 
 My teacher rightfully never stops laughing when I tell him about my Mega Drive projects, since these personal goals are quite insane and nerdy *(I do Judo and recently got involved in endurance race. I love it so much, don't worry about my health)*.
 
 ### Controls
-D-Pad right: next text to print
-D-Pad left: clear and re-print the slide from the start
-D-Pad up: next slide
-D-Pad down: previous slide
-A: make the presentation crash (you'll need to reset the console or emulator)
-B: clear screen (in case stray characters get printed, never happened though)
+D-Pad right: next text to print  
+D-Pad left: clear and re-print the slide from the start  
+D-Pad up: next slide  
+D-Pad down: previous slide  
+A: make the presentation crash (you'll need to reset the console or emulator)  
+B: clear screen (in case stray characters get printed, never happened though)  
