@@ -13,7 +13,7 @@ Yes, you can, but please just let me know first (you don't have to ask)!
 In order to build the ROM, you can use my [Visual Studio Code extension](https://github.com/Franklin0770/megaenvironment)
 
 ## Can you provide the lore?
-With the courtesy of my Systems and Networks teacher, I created in two weeks this presentation **for PAL Mega Drive systems only** (for the taller resolution, useful for showing more content in screen).  
+With the courtesy of my Systems and Networks teacher, I created in two weeks this presentation **for PAL Mega Drive systems only** (for the taller resolution, useful for showing more content on screen).  
 This presentation served as a base to teach my classmates a brief comparison of the x86 architecture and the 68k one, by also illustrating the Intel 8086 and Motorola 68000 assembly respectively.
 
 ## How did the lesson go?
