@@ -431,11 +431,11 @@ STR_Properties: include "assets/String Properties.asm"
 
 ;=================================================================================
 
-; -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-; | General registers purpose (because I hate RAM accesses)																															|
-; | a0: VDP control port, a1: VDP data port, a2: controller control port, a3: controller data port, a4: string addresses array, a5: address string array, a6: unused				|
-; | d7: contains $40 to request controller access, d6: controller state, d5: controller press tester, d4: VBlank tester, d3: zero writer, d2,d1,d0: generic purpose	|
-; -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+; -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+; | General registers purpose (because I hate RAM accesses)																												|
+; | a0: VDP control port, a1: VDP data port, a2: controller control port, a3: controller data port, a4: string addresses array, a5: address string array, a6: unused	|
+; | d7: contains $40 to request controller access, d6: controller state, d5: controller press tester, d4: VBlank tester, d3: zero writer, d2,d1,d0: generic purpose		|
+; -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 EntryPoint:
 CPU_RegistersDeclaration
@@ -495,14 +495,14 @@ CRAM_Load_BodyFontPalette
 ; ---------------------------------------------------------------------------
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
 
-GetJoypad:
-	move.b 	d7,(a3)	; write $40 to request controller state
-	nop	; wait for the bus to get the controller state
-	nop
-	nop
-	nop
-	move.b	(a3),d6	; put control state somewhere
-	rts
+;GetJoypad:
+;	move.b 	d7,(a3)	; write $40 to request controller state
+;	nop	; wait for the bus to get the controller state
+;	nop
+;	nop
+;	nop
+;	move.b	(a3),d6	; put control state somewhere
+;	rts
 
 ; This portion of code was meant to change slide only by pressing the button once (not by holding, effectively avoiding debouncing).
 ; This is unnecessary, because the animation is slow enough to prevent accidental slide changes
@@ -519,10 +519,16 @@ GetJoypad:
 ; ---------------------------------------------------------------------------
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
 
-; Why is GetJoypad in the bottom of this routine?
+; Why is GetJoypad at the bottom of this routine?
 ; Because PressWait has already updated the controller state at this point.
 ReadJoypad:
-	bsr.s	GetJoypad
+	;bsr.s	GetJoypad
+	move.b 	d7,(a3)	; write $40 to request controller state
+	nop	; wait for the bus to get the controller state
+	nop
+	nop
+	nop
+	move.b	(a3),d6	; put control state somewhere
 	btst 	#JOY_R,d6
 	beq.s 	NextString
 	btst	#JOY_L,d6
@@ -541,7 +547,7 @@ WaitNextFrame:
 
 RedrawSlide:
 .find_terminator:
-	tst.w	-(a4)
+	tst.w	-(a4)		; find the previous terminator
 	bpl.s	.find_terminator
 	bsr.s 	VDP_ClearScreen
 	bra.s	UpdateStringProperties
@@ -549,7 +555,7 @@ RedrawSlide:
 NextString:
 	cmpa.w	#Slide8+6,a4	; is the boundary limit to avoid going outside the slides being hit?
 	bhs.s	WaitNextFrame	; if yes, do nothing
-	;addq.w	#6,a4			already done by UpdateStringProperties
+	;addq.w	#6,a4			; already done by UpdateStringProperties
 	
 ; ---------------------------------------------------------------------------
 ; Subroutine to	draw text on screen (a4: string pointer)
@@ -600,10 +606,10 @@ PreviousSlide:
 	cmpa.w	#Slide0+8,a4	; is the boundary limit to avoid going outside the slides being hit?
 	bls.w	WaitNextFrame	; if yes, do nothing
 .find_terminator:
-	tst.w	-(a4)
-	bpl.s	.find_terminator
+	tst.w	-(a4)				; test until we find the terminator
+	bpl.s	.find_terminator	; terminator is $FFFF so it's negative
 .find_secondterminator:
-	tst.w	-(a4)
+	tst.w	-(a4)				; find the next terminator
 	bpl.s	.find_secondterminator
 	bsr.s 	VDP_ClearScreen
 	bra.s	UpdateStringProperties

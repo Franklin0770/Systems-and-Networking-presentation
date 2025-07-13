@@ -16,6 +16,7 @@
 		"bswap",
 		"dfntxt"
 	],
-	"megaenvironment.variablesFileName": "",
-	"megaenvironment.fillValue": "FF"
+	"megaenvironment.sourceCodeControl.currentWorkingFolders": [
+		"assets"
+	]
 }
