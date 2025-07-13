@@ -423,11 +423,11 @@ VDP_VBlankInt:
 
 ; Assets section
 
-PAT_BodyFont: include "assets/Body Font.asm"
+PAT_BodyFont: include "Body Font.asm"
 
-STR_Strings: include "assets/Strings.asm"
+STR_Strings: include "Strings.asm"
 
-STR_Properties: include "assets/String Properties.asm"
+STR_Properties: include "String Properties.asm"
 
 ;=================================================================================
 

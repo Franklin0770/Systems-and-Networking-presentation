@@ -1,14 +1,14 @@
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 1 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 1 - 7/13/2025 17:31:55
 
 
-       1/       0 :                     	cpu 68000
-       2/       0 :                     	
-       3/       0 :                     	supmode on	; We don't need warnings about privileged instructions
-       4/       0 :                     
-       5/       0 :                     	listing purecode
-       6/       0 :                     	
-       7/       0 :                     	;include "ComplierMacros.asm" unused
-       8/       0 :                     	include "MegaDriveMacros.asm"
+    1/       0 :                        	cpu 68000
+    2/       0 :                        	
+    3/       0 :                        	supmode on	; We don't need warnings about privileged instructions
+    4/       0 :                        
+    5/       0 :                        	listing purecode
+    6/       0 :                        	
+    7/       0 :                        	;include "ComplierMacros.asm" unused
+    8/       0 :                        	include "MegaDriveMacros.asm"
 (1)    1/       0 :                     ; ---------------------------------------------------------------------------
 (1)    2/       0 :                     ; Macros to define text based on VRAM tiles
 (1)    3/       0 :                     ; ---------------------------------------------------------------------------
@@ -61,7 +61,7 @@
 (1)   50/       0 :                     dmaLength function length,((length>>1)&$7FFF)
 (1)   51/       0 :                     dmaCommandLength function length,((VDPREG_DMALEN_H|((length&$FF00)>>8))<<16)|($9300|(length&$FF))
 (1)   52/       0 :                     dmaCommandSrcLow function source,((VDPREG_DMASRC_M|((source&$FF00)>>8))<<16)|($9500|(source&$FF))
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(MegaDriveMacros.asm) - Page 2 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(MegaDriveMacros.asm) - Page 2 - 7/13/2025 17:31:55
 
 
 (1)   53/       0 :                     dmaCommandSrcHigh function source,VDPREG_DMASRC_H|(((source&$FF0000)>>16)&$7F)
@@ -124,7 +124,7 @@
 (1)  110/       0 :                     ; * the high byte is written to address+3
 (1)  111/       0 :                     ; * the high byte is written to address+2
 (1)  112/       0 :                     ; * etc.
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(MegaDriveMacros.asm) - Page 3 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(MegaDriveMacros.asm) - Page 3 - 7/13/2025 17:31:55
 
 
 (1)  113/       0 :                     ; This allows reducing the length of the fill by 1.
@@ -187,7 +187,7 @@
 (1)  170/       0 :                     	endm
 (1)  171/       0 :                     	
 (1)  172/       0 :                     subaq: macro value,register
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(MegaDriveMacros.asm) - Page 4 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(MegaDriveMacros.asm) - Page 4 - 7/13/2025 17:31:55
 
 
 (1)  173/       0 :                     	if (value > $7FFF)
@@ -250,7 +250,7 @@
 (1)   52/       0 :                     
 (1)   53/       0 : =$9300              VDPREG_DMALEN_L:  equ $9300  ; DMA length (low)
 (1)   54/       0 : =$9400              VDPREG_DMALEN_H:  equ $9400  ; DMA length (high)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(Constants.asm) - Page 5 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(Constants.asm) - Page 5 - 7/13/2025 17:31:55
 
 
 (1)   55/       0 : =$9500              VDPREG_DMASRC_L:  equ $9500  ; DMA source (low)
@@ -293,72 +293,72 @@
       13/       0 :                     ROM_Start																	; Error codes ($AAxx)
       14/       0 :                     Vectors:
       15/       0 : 0000 0000           		dc.l SYS_STACK			; Initial stack pointer value (SP value)
-      16/       4 : 0000 216A           		dc.l EntryPoint			; Start of program (PC value)
-      17/       8 : 0000 0200           		dc.l BusError			; Bus error									($2)
-      18/       C : 0000 0214           		dc.l AddressError		; Address error 							($3)
-      19/      10 : 0000 0228           		dc.l IllegalInstruction	; Illegal instruction						($4)
-      20/      14 : 0000 023C           		dc.l DivisionByZero		; Division by zero							($5)
-      21/      18 : 0000 0250           		dc.l CHKException		; CHK exception								($6)
-      22/      1C : 0000 0264           		dc.l TRAPVException		; TRAPV exception 							($7)
-      23/      20 : 0000 0278           		dc.l PrivilegeViolation	; Privilege violation						($8)
-      24/      24 : 0000 028A           		dc.l TRACEException		; TRACE exception							($9)
-      25/      28 : 0000 029C           		dc.l Line1010Emu		; Line-A emulator							($A)
-      26/      2C : 0000 02AE           		dc.l Line1111Emu		; Line-F emulator 							($B)
-      27/      30 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      28/      34 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      29/      38 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      30/      3C : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      31/      40 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      32/      44 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      33/      48 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      34/      4C : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      35/      50 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 6 - 7/13/2025 17:28:33
+      16/       4 : 0000 0004           		dc.l EntryPoint			; Start of program (PC value)
+      17/       8 : 0000 0008           		dc.l BusError			; Bus error									($2)
+      18/       C : 0000 000C           		dc.l AddressError		; Address error 							($3)
+      19/      10 : 0000 0010           		dc.l IllegalInstruction	; Illegal instruction						($4)
+      20/      14 : 0000 0014           		dc.l DivisionByZero		; Division by zero							($5)
+      21/      18 : 0000 0018           		dc.l CHKException		; CHK exception								($6)
+      22/      1C : 0000 001C           		dc.l TRAPVException		; TRAPV exception 							($7)
+      23/      20 : 0000 0020           		dc.l PrivilegeViolation	; Privilege violation						($8)
+      24/      24 : 0000 0024           		dc.l TRACEException		; TRACE exception							($9)
+      25/      28 : 0000 0028           		dc.l Line1010Emu		; Line-A emulator							($A)
+      26/      2C : 0000 002C           		dc.l Line1111Emu		; Line-F emulator 							($B)
+      27/      30 : 0000 0030           		dc.l GenericError		; Unused (reserved)
+      28/      34 : 0000 0034           		dc.l GenericError		; Unused (reserved)
+      29/      38 : 0000 0038           		dc.l GenericError		; Unused (reserved)
+      30/      3C : 0000 003C           		dc.l GenericError		; Unused (reserved)
+      31/      40 : 0000 0040           		dc.l GenericError		; Unused (reserved)
+      32/      44 : 0000 0044           		dc.l GenericError		; Unused (reserved)
+      33/      48 : 0000 0048           		dc.l GenericError		; Unused (reserved)
+      34/      4C : 0000 004C           		dc.l GenericError		; Unused (reserved)
+      35/      50 : 0000 0050           		dc.l GenericError		; Unused (reserved)
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 6 - 7/13/2025 17:31:55
 
 
-      36/      54 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      37/      58 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      38/      5C : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      39/      60 : 0000 02C0           		dc.l SpuriousException	; Spurious exception						($C)
-      40/      64 : 0000 02E4           		dc.l GenericError		; IRQ level 1
-      41/      68 : 0000 02E4           		dc.l GenericError		; IRQ level 2
-      42/      6C : 0000 02E4           		dc.l GenericError		; IRQ level 3 
-      43/      70 : 0000 02E4           		dc.l GenericError		; IRQ level 4 (horizontal retrace interrupt)
-      44/      74 : 0000 02E4           		dc.l GenericError		; IRQ level 5
-      45/      78 : 0000 04F2           		dc.l VDP_VBlankInt		; IRQ level 6 (vertical retrace interrupt)
-      46/      7C : 0000 02E4           		dc.l GenericError		; IRQ level 7
-      47/      80 : 0000 02E4           		dc.l GenericError		; TRAP #00 exception						($D)
-      48/      84 : 0000 02E4           		dc.l GenericError		; TRAP #01 exception
-      49/      88 : 0000 02E4           		dc.l GenericError		; TRAP #02 exception
-      50/      8C : 0000 02E4           		dc.l GenericError		; TRAP #03 exception
-      51/      90 : 0000 02E4           		dc.l GenericError		; TRAP #04 exception
-      52/      94 : 0000 02E4           		dc.l GenericError		; TRAP #05 exception
-      53/      98 : 0000 02E4           		dc.l GenericError		; TRAP #06 exception
-      54/      9C : 0000 02E4           		dc.l GenericError		; TRAP #07 exception
-      55/      A0 : 0000 02E4           		dc.l GenericError		; TRAP #08 exception
-      56/      A4 : 0000 02E4           		dc.l GenericError		; TRAP #09 exception
-      57/      A8 : 0000 02E4           		dc.l GenericError		; TRAP #10 exception
-      58/      AC : 0000 02E4           		dc.l GenericError		; TRAP #11 exception
-      59/      B0 : 0000 02E4           		dc.l GenericError		; TRAP #12 exception
-      60/      B4 : 0000 02E4           		dc.l GenericError		; TRAP #13 exception
-      61/      B8 : 0000 02E4           		dc.l GenericError		; TRAP #14 exception
-      62/      BC : 0000 02E4           		dc.l GenericError		; TRAP #15 exception
-      63/      C0 : 0000 02E4           		dc.l GenericError		; Unused (reserved)							($E)
-      64/      C4 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      65/      C8 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      66/      CC : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      67/      D0 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      68/      D4 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      69/      D8 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      70/      DC : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      71/      E0 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      72/      E4 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      73/      E8 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      74/      EC : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      75/      F0 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      76/      F4 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      77/      F8 : 0000 02E4           		dc.l GenericError		; Unused (reserved)
-      78/      FC : 0000 02E4           		dc.l GenericError		; Unused (reserved)
+      36/      54 : 0000 0054           		dc.l GenericError		; Unused (reserved)
+      37/      58 : 0000 0058           		dc.l GenericError		; Unused (reserved)
+      38/      5C : 0000 005C           		dc.l GenericError		; Unused (reserved)
+      39/      60 : 0000 0060           		dc.l SpuriousException	; Spurious exception						($C)
+      40/      64 : 0000 0064           		dc.l GenericError		; IRQ level 1
+      41/      68 : 0000 0068           		dc.l GenericError		; IRQ level 2
+      42/      6C : 0000 006C           		dc.l GenericError		; IRQ level 3 
+      43/      70 : 0000 0070           		dc.l GenericError		; IRQ level 4 (horizontal retrace interrupt)
+      44/      74 : 0000 0074           		dc.l GenericError		; IRQ level 5
+      45/      78 : 0000 0078           		dc.l VDP_VBlankInt		; IRQ level 6 (vertical retrace interrupt)
+      46/      7C : 0000 007C           		dc.l GenericError		; IRQ level 7
+      47/      80 : 0000 0080           		dc.l GenericError		; TRAP #00 exception						($D)
+      48/      84 : 0000 0084           		dc.l GenericError		; TRAP #01 exception
+      49/      88 : 0000 0088           		dc.l GenericError		; TRAP #02 exception
+      50/      8C : 0000 008C           		dc.l GenericError		; TRAP #03 exception
+      51/      90 : 0000 0090           		dc.l GenericError		; TRAP #04 exception
+      52/      94 : 0000 0094           		dc.l GenericError		; TRAP #05 exception
+      53/      98 : 0000 0098           		dc.l GenericError		; TRAP #06 exception
+      54/      9C : 0000 009C           		dc.l GenericError		; TRAP #07 exception
+      55/      A0 : 0000 00A0           		dc.l GenericError		; TRAP #08 exception
+      56/      A4 : 0000 00A4           		dc.l GenericError		; TRAP #09 exception
+      57/      A8 : 0000 00A8           		dc.l GenericError		; TRAP #10 exception
+      58/      AC : 0000 00AC           		dc.l GenericError		; TRAP #11 exception
+      59/      B0 : 0000 00B0           		dc.l GenericError		; TRAP #12 exception
+      60/      B4 : 0000 00B4           		dc.l GenericError		; TRAP #13 exception
+      61/      B8 : 0000 00B8           		dc.l GenericError		; TRAP #14 exception
+      62/      BC : 0000 00BC           		dc.l GenericError		; TRAP #15 exception
+      63/      C0 : 0000 00C0           		dc.l GenericError		; Unused (reserved)							($E)
+      64/      C4 : 0000 00C4           		dc.l GenericError		; Unused (reserved)
+      65/      C8 : 0000 00C8           		dc.l GenericError		; Unused (reserved)
+      66/      CC : 0000 00CC           		dc.l GenericError		; Unused (reserved)
+      67/      D0 : 0000 00D0           		dc.l GenericError		; Unused (reserved)
+      68/      D4 : 0000 00D4           		dc.l GenericError		; Unused (reserved)
+      69/      D8 : 0000 00D8           		dc.l GenericError		; Unused (reserved)
+      70/      DC : 0000 00DC           		dc.l GenericError		; Unused (reserved)
+      71/      E0 : 0000 00E0           		dc.l GenericError		; Unused (reserved)
+      72/      E4 : 0000 00E4           		dc.l GenericError		; Unused (reserved)
+      73/      E8 : 0000 00E8           		dc.l GenericError		; Unused (reserved)
+      74/      EC : 0000 00EC           		dc.l GenericError		; Unused (reserved)
+      75/      F0 : 0000 00F0           		dc.l GenericError		; Unused (reserved)
+      76/      F4 : 0000 00F4           		dc.l GenericError		; Unused (reserved)
+      77/      F8 : 0000 00F8           		dc.l GenericError		; Unused (reserved)
+      78/      FC : 0000 00FC           		dc.l GenericError		; Unused (reserved)
       79/     100 :                     		
       80/     100 :                     Header_Start:
       81/     100 : 5345 4741 204D 4547 		dc.b "SEGA MEGA DRIVE",$20					; "$20" is padding
@@ -376,7 +376,7 @@
               160 : 7374 656D 693A 2036
               168 : 386B 2065 2078 3836
       86/     170 : 2020 2020 2020 2020 		dc.b "                "						; padding
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 7 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 7 - 7/13/2025 17:31:55
 
 
               178 : 2020 2020 2020 2020
@@ -387,7 +387,7 @@
       90/     191 : 2020 2020 2020 2020 		dc.b "               "						; padding
               199 : 2020 2020 2020 20
       91/     1A0 : 0000 0000           		dc.l ROM_Start								; Start address of ROM
-      92/     1A4 : 0000 22E8           		dc.l ROM_End								; End address of ROM
+      92/     1A4 : 0000 01A4           		dc.l ROM_End								; End address of ROM
       93/     1A8 : 00FF 0000           		dc.l $FF0000								; Start address of WRAM
       94/     1AC : 00FF FFFF           		dc.l $FFFFFF 								; End address of WRAM
       95/     1B0 : 2020 2020 2020 2020 		dc.b "                                                                "	; more padding
@@ -406,82 +406,82 @@
      100/     200 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP	; we need to force the dump address
      101/     208 : 40F9 00FF 0040      	move sr,REG_DUMP+$40	; dump the status register also
      102/     20E : 7E12                	moveq	#2+$10,d7
-     103/     210 : 6000 00F4           	bra.w	VDP_BSOD
+     103/     210 : 6000 FFFE           	bra.w	VDP_BSOD
      104/     214 :                     
      105/     214 :                     AddressError:
      106/     214 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      107/     21C : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      108/     222 : 7E13                	moveq	#3+$10,d7
-     109/     224 : 6000 00E0           	bra.w	VDP_BSOD
+     109/     224 : 6000 FFFE           	bra.w	VDP_BSOD
      110/     228 :                     
      111/     228 :                     IllegalInstruction:
      112/     228 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      113/     230 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      114/     236 : 7E14                	moveq	#4+$10,d7
-     115/     238 : 6000 00CC           	bra.w 	VDP_BSOD
+     115/     238 : 6000 FFFE           	bra.w 	VDP_BSOD
      116/     23C :                     
      117/     23C :                     DivisionByZero:
      118/     23C : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      119/     244 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      120/     24A : 7E15                	moveq	#5+$10,d7
-     121/     24C : 6000 00B8           	bra.w 	VDP_BSOD
+     121/     24C : 6000 FFFE           	bra.w 	VDP_BSOD
      122/     250 :                     	
      123/     250 :                     CHKException:
      124/     250 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      125/     258 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      126/     25E : 7E16                	moveq	#6+$10,d7
-     127/     260 : 6000 00A4           	bra.w	VDP_BSOD
+     127/     260 : 6000 FFFE           	bra.w	VDP_BSOD
      128/     264 :                     	
      129/     264 :                     TRAPVException:
      130/     264 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      131/     26C : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      132/     272 : 7E17                	moveq	#7+$10,d7
-     133/     274 : 6000 0090           	bra.w	VDP_BSOD
+     133/     274 : 6000 FFFE           	bra.w	VDP_BSOD
      134/     278 :                     	
      135/     278 :                     PrivilegeViolation:
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 8 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 8 - 7/13/2025 17:31:55
 
 
      136/     278 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      137/     280 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      138/     286 : 7E18                	moveq	#8+$10,d7
-     139/     288 : 607C                	bra.s	VDP_BSOD
+     139/     288 : 60FE                	bra.s	VDP_BSOD
      140/     28A :                     	
      141/     28A :                     TRACEException:
      142/     28A : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      143/     292 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      144/     298 : 7E19                	moveq	#9+$10,d7
-     145/     29A : 606A                	bra.s	VDP_BSOD
+     145/     29A : 60FE                	bra.s	VDP_BSOD
      146/     29C :                     
      147/     29C :                     Line1010Emu:
      148/     29C : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      149/     2A4 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      150/     2AA : 7E1A                	moveq	#$A+$10,d7
-     151/     2AC : 6058                	bra.s	VDP_BSOD
+     151/     2AC : 60FE                	bra.s	VDP_BSOD
      152/     2AE :                     	
      153/     2AE :                     Line1111Emu:
      154/     2AE : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      155/     2B6 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      156/     2BC : 7E1B                	moveq	#$B+$10,d7
-     157/     2BE : 6046                	bra.s	VDP_BSOD
+     157/     2BE : 60FE                	bra.s	VDP_BSOD
      158/     2C0 :                     	
      159/     2C0 :                     SpuriousException:
      160/     2C0 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      161/     2C8 : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      162/     2CE : 7E1C                	moveq	#$C+$10,d7
-     163/     2D0 : 6034                	bra.s	VDP_BSOD
+     163/     2D0 : 60FE                	bra.s	VDP_BSOD
      164/     2D2 :                     	
      165/     2D2 :                     TRAPxxException:
      166/     2D2 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      167/     2DA : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      168/     2E0 : 7E1D                	moveq	#$D+$10,d7
-     169/     2E2 : 6022                	bra.s	VDP_BSOD
+     169/     2E2 : 60FE                	bra.s	VDP_BSOD
      170/     2E4 :                     	
      171/     2E4 :                     GenericError:
      172/     2E4 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
      173/     2EC : 40F9 00FF 0040      	move sr,REG_DUMP+$40
      174/     2F2 : 7E1E                	moveq	#$E+$10,d7
-     175/     2F4 : 6010                	bra.s	VDP_BSOD
+     175/     2F4 : 60FE                	bra.s	VDP_BSOD
      176/     2F6 :                     	
      177/     2F6 :                     ManualCrash:
      178/     2F6 : 48F9 FFFF 00FF 0000 	movem.l	d0-a7,REG_DUMP
@@ -502,7 +502,7 @@
      193/     328 :                     ; ---------------------------------------------------------------------------
      194/     328 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
      195/     328 :                     	
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 9 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 9 - 7/13/2025 17:31:55
 
 
      196/     328 :                     CPU_ClearScreen:
@@ -514,11 +514,11 @@
      200/     334 :                     .clear_screen:
      201/     334 : 2281                	move.l	d1,(a1)		; clear portion of screen by setting the background tiles
      202/     336 : 3403                	move.w	d3,d2		; update the slow down timer for CPU_Wait
-     203/     338 : 6100 01AA           	bsr.w	CPU_Wait	; make the slow down effect
+     203/     338 : 6100 FFFE           	bsr.w	CPU_Wait	; make the slow down effect
      204/     33C : 51C8 FFF6           	dbf d0,.clear_screen; keep clearing until done
      205/     340 :                     	
      206/     340 : 343C 2FFF           	move.w	#$2FFF,d2	; update the slow down timer
-     207/     344 : 6100 019E           	bsr.w	CPU_Wait	; a bit of lag
+     207/     344 : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      208/     348 :                     
      209/     348 :                     BlueScreen:
      210/     348 : (MACRO)[2]          	vdpSetColorSpace 0,(a0)
@@ -526,14 +526,14 @@
      211/     34E : 22BC 0E00 0EEE      	move.l	#$0E000EEE,(a1)	; makes the background blue and the font white
      212/     354 :                     	
      213/     354 : 243C 0002 FFFF      	move.l	#$2FFFF,d2	; update the slow down timer
-     214/     35A : 6100 0188           	bsr.w	CPU_Wait	; a bit of lag
+     214/     35A : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      215/     35E :                     	
      216/     35E :                     CPU_Load_BodyFont:
      217/     35E : (MACRO)[3]          	vdpSetVideoAddress $0000,(a0)
      217/     35E :  (MACRO-2)[4]           setRAMAddress       $0000, VRAM, (a0)
      217/     35E : 20BC 4000 0000              move.l  #vdpCommand($0000,VRAM),(a0)
      218/     364 : 303C 0300           	move.w	#PAT_BodyFont_SIZE_B/4,d0
-     219/     368 : 45F8 04F4           	lea	(PAT_BodyFont),a2
+     219/     368 : 45F8 0368           	lea	(PAT_BodyFont),a2
      220/     36C :                     	
      221/     36C :                     .load_font:
      222/     36C : 229A                	move.l	(a2)+,(a1)
@@ -545,7 +545,7 @@
      228/     372 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
      229/     372 :                     
      230/     372 :                     PrintMessages:	
-     231/     372 : 45F8 212E           	lea Messages,a2		; points to the string address in the properties array
+     231/     372 : 45F8 0372           	lea Messages,a2		; points to the string address in the properties array
      232/     376 : 264A                	movea.l	a2,a3		; reset a5 (since we will write only in word operations)
      233/     378 : 7000                	moveq	#0,d0		; clear the length register (cycle counter)
      234/     37A : 7804                	moveq	#5-1,d4		; 5 strings to print (Message0 ~ Code)
@@ -557,18 +557,18 @@
      240/     386 :                     	; get string screen position address and set the plane A accordingly
      241/     386 : 20AA 0002               move.l	2(a2),(a0)	; update the plane coordinates using fixed value
      242/     38A : 363C 07FF           	move.w	#$7FF,d3	; update the slow down timer for VDP_PrintText
-     243/     38E : 6100 0144           	bsr.w	VDP_PrintText
+     243/     38E : 6100 FFFE           	bsr.w	VDP_PrintText
      244/     392 :                     	
      245/     392 : 5C4A                	addq.w	#6,a2		; jump into next string (also skips the coordinates)
      246/     394 : 343C 1FFF           	move.w	#$1FFF,d2	; update the slow down timer
-     247/     398 : 6100 014A           	bsr.w	CPU_Wait	; a bit of lag
+     247/     398 : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      248/     39C : 51CC FFDE           	dbf d4,.setup_message
      249/     3A0 :                     	
      250/     3A0 : 343C 2FFF           	move.w	#$2FFF,d2	; update the slow down timer
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 10 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 10 - 7/13/2025 17:31:55
 
 
-     251/     3A4 : 6100 013E           	bsr.w	CPU_Wait	; a bit of lag
+     251/     3A4 : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      252/     3A8 :                     
      253/     3A8 :                     ; ---------------------------------------------------------------------------
      254/     3A8 :                     ; Subroutine to	print on screen the error code in hexadecimal
@@ -582,13 +582,13 @@
      262/     3B0 : 1007                	move.b	d7,d0		; move error code to be "Ax"
      263/     3B2 :                     	
      264/     3B2 : 0C07 001A           	cmpi.b	#$A+$10,d7	; is the error code a letter?
-     265/     3B6 : 6502                	blo.s	.continue	; if not do not align VRAM for letters
+     265/     3B6 : 65FE                	blo.s	.continue	; if not do not align VRAM for letters
      266/     3B8 : 5E00                	addq.b	#7,d0		; align VRAM to print hexadecimal letters
      267/     3BA :                     .continue:
      268/     3BA : 2280                	move.l	d0,(a1)		; print the rest of the error code
      269/     3BC :                     	
      270/     3BC : 343C FFFF           	move.w	#$FFFF,d2	; update the slow down timer
-     271/     3C0 : 6100 0122           	bsr.w	CPU_Wait	; a bit of lag
+     271/     3C0 : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      272/     3C4 :                     
      273/     3C4 :                     ; ---------------------------------------------------------------------------
      274/     3C4 :                     ; Subroutine to	print on screen the error code in text
@@ -596,7 +596,7 @@
      276/     3C4 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
      277/     3C4 :                     
      278/     3C4 :                     PrintTextCode
-     279/     3C4 : 45F8 214C           	lea TextCodes,a2	; load text codes array
+     279/     3C4 : 45F8 03C4           	lea TextCodes,a2	; load text codes array
      280/     3C8 : 0407 0012           	subi.b	#$10+2,d7	; align d7 (VRAM alignment + how error codes count by design)
      281/     3CC : E30F                	lsl.b	#1,d7		; update incrementer for word jumps
      282/     3CE : D4C7                	adda.w	d7,a2		; snipe the string address
@@ -606,10 +606,10 @@
      286/     3D8 : 5340                	subq.w	#1,d0		; dbf ends up with $FFFF
      287/     3DA : 20BC 6384 0003      	move.l	#vdpCoordinates(2,7),(a0)	; set fixed text code position on screen
      288/     3E0 : 363C 08FF           	move.w	#$8FF,d3	; update the slow down timer for VDP_PrintText
-     289/     3E4 : 6100 00EE           	bsr.w	VDP_PrintText
+     289/     3E4 : 6100 FFFE           	bsr.w	VDP_PrintText
      290/     3E8 :                     	
      291/     3E8 : 343C FFFF           	move.w	#$FFFF,d2	; update the slow down timer
-     292/     3EC : 6100 00F6           	bsr.w	CPU_Wait	; a bit of lag
+     292/     3EC : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      293/     3F0 :                     	
      294/     3F0 :                     ; ---------------------------------------------------------------------------
      295/     3F0 :                     ; Subroutine to	print on screen the register names (or prefixes)
@@ -618,17 +618,17 @@
      298/     3F0 :                     	
      299/     3F0 :                     PrintRegisterDump
      300/     3F0 :                     .print_message:
-     301/     3F0 : 47F8 1E01           	lea	Message5,a3		; points to the string address directly
+     301/     3F0 : 47F8 03F0           	lea	Message5,a3		; points to the string address directly
      302/     3F4 : 700E                	moveq	#15-1,d0	; this string is 15 characters long
      303/     3F6 : 20BC 6500 0003      	move.l	#vdpCoordinates(0,10),(a0)
      304/     3FC : 363C 0AFF           	move.w	#$AFF,d3	; update the slow down timer for VDP_PrintText
-     305/     400 : 6100 00D2           	bsr.w	VDP_PrintText
+     305/     400 : 6100 FFFE           	bsr.w	VDP_PrintText
      306/     404 : 343C 5FFF           	move.w	#$5FFF,d2	; update the slow down timer
-     307/     408 : 6100 00DA           	bsr.w	CPU_Wait	; a bit of lag
+     307/     408 : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      308/     40C :                     
      309/     40C : 7007                	moveq	#8-1,d0		; 8 registers to write
      310/     40E : 7C07                	moveq	#8-1,d6		; 8 digits to print
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 11 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 11 - 7/13/2025 17:31:55
 
 
      311/     410 : 7A00                	moveq	#0,d5
@@ -649,7 +649,7 @@
      326/     438 :                     .print_prefix:
      327/     438 : 329A                	move.w	(a2)+,(a1)	; print register number
      328/     43A : 343C 0FFF           	move.w	#$FFF,d2	; update the slow down timer
-     329/     43E : 6100 00A4           	bsr.w	CPU_Wait	; a bit of lag
+     329/     43E : 6100 FFFE           	bsr.w	CPU_Wait	; a bit of lag
      330/     442 : 51CB FFF4           	dbf d3,.print_prefix
      331/     446 :                     	
      332/     446 : (MACRO)[5]          	subaq	10,a2		; reposition a2 to the prefixes' start
@@ -668,7 +668,7 @@
      344/     452 : 0205 000F           	andi.b	#$F,d5		; remove the other digit
      345/     456 :                     	
      346/     456 : 0C05 000A           	cmpi.b	#$A,d5		; is the digit a letter?
-     347/     45A : 6502                	blo.s	.continue	; if not do not align VRAM for letters
+     347/     45A : 65FE                	blo.s	.continue	; if not do not align VRAM for letters
      348/     45C : 5E05                	addq.b	#7,d5		; align VRAM to print letters
      349/     45E :                     .continue:
      350/     45E : 0605 0010           	addi.b	#$10,d5		; align VRAM to print numbers or letters
@@ -680,25 +680,25 @@
      356/     46E : 0681 0080 0000      	addi.l	#$800000,d1			; new line by adding coordinates
      357/     474 :                     	
      358/     474 : 343C 1FFF           	move.w	#$1FFF,d2			; update the slow down timer
-     359/     478 : 6100 006A           	bsr.w	CPU_Wait			; a bit of lag
+     359/     478 : 6100 FFFE           	bsr.w	CPU_Wait			; a bit of lag
      360/     47C : 51C8 FFB6           	dbf d0,.print_registers
      361/     480 :                     
      362/     480 :                     .print_address_registers
      363/     480 : B7FC 00FF 0020      	cmpa.l	#REG_DUMP+$20,a3	; has the VDP already printed the address registers?
-     364/     486 : 621A                	bhi.s	.print_sp			; if yes, print stack pointer
+     364/     486 : 62FE                	bhi.s	.print_sp			; if yes, print stack pointer
      365/     488 : 7006                	moveq	#7-1,d0				; 7 registers to print
      366/     48A : 7C07                	moveq	#8-1,d6				; 8 digits to print
      367/     48C : 5739 00FF 0043      	subq.b	#3,REG_PREFIXES+1	; change prefix from 'd' to 'a'
      368/     492 : 5139 00FF 0045      	subq.b	#8,REG_PREFIXES+3	; restart the count from 0
      369/     498 : 223C 6626 0003      	move.l	#vdpCoordinates(19,12),d1	; update coordinates
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 12 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 12 - 7/13/2025 17:31:55
 
 
      370/     49E : 6000 FF94           	bra.w	.print_registers	; print address register dump
      371/     4A2 :                     	
      372/     4A2 :                     .print_sp:
      373/     4A2 : B7FC 00FF 003C      	cmpa.l	#REG_DUMP+$3C,a3	; has the VDP already printed the stack pointer?
-     374/     4A8 : 620E                	bhi.s	.print_sr			; if yes, print the status register
+     374/     4A8 : 62FE                	bhi.s	.print_sr			; if yes, print the status register
      375/     4AA : 7000                	moveq	#1-1,d0				; 1 register to write
      376/     4AC : 7C07                	moveq	#8-1,d6				; 8 digits to print
      377/     4AE : 24BC 0053 0050      	move.l	#chars('s','p'),(a2); use "sp" prefix
@@ -706,7 +706,7 @@
      379/     4B8 :                     	
      380/     4B8 :                     .print_sr:
      381/     4B8 : B7FC 00FF 0040      	cmpa.l	#REG_DUMP+$40,a3	; has the VDP already printed the stack pointer?
-     382/     4BE : 622E                	bhi.s 	Halt_CPU			; if yes, stop the execution
+     382/     4BE : 62FE                	bhi.s 	Halt_CPU			; if yes, stop the execution
      383/     4C0 : 7000                	moveq	#1-1,d0				; 1 register to write
      384/     4C2 : 7C03                	moveq	#4-1,d6				; 4 digits to print
      385/     4C4 : 24BC 0053 0052      	move.l	#chars('s','r'),(a2)		; use "sr" prefix
@@ -724,7 +724,7 @@
      397/     4D6 : 121B                	move.b 	(a3)+,d1	; move character to d1
      398/     4D8 : 3281                	move.w 	d1,(a1)		; no flip, palette 0, no priority
      399/     4DA : 2403                	move.l	d3,d2		; update the slow down timer for CPU_Wait
-     400/     4DC : 6106                	bsr.s	CPU_Wait	; make the slow down effect
+     400/     4DC : 61FE                	bsr.s	CPU_Wait	; make the slow down effect
      401/     4DE : 51C8 FFF6           	dbf	d0,.update_display
      402/     4E2 : 4E75                	rts
      403/     4E4 :                     
@@ -754,7 +754,7 @@
 (1)    1/     4F4 :                     	; --- Tiles ---
 (1)    2/     4F4 : 0000 0000           	dc.l	$00000000	;	Tile (col 0, row 0)
 (1)    3/     4F8 : 0000 0000           	dc.l	$00000000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 13 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 13 - 7/13/2025 17:31:55
 
 
 (1)    4/     4FC : 0000 0000           	dc.l	$00000000
@@ -817,7 +817,7 @@
 (1)   61/     5E0 : 0001 1000           	dc.l	$00011000
 (1)   62/     5E4 : 0000 0000           	dc.l	$00000000
 (1)   63/     5E8 : 0000 0000           	dc.l	$00000000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 14 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 14 - 7/13/2025 17:31:55
 
 
 (1)   64/     5EC : 0000 0000           	dc.l	$00000000
@@ -880,7 +880,7 @@
 (1)  121/     6D0 : 0000 0000           	dc.l	$00000000
 (1)  122/     6D4 : 0000 0000           	dc.l	$00000000	;	Tile (col 05, row 0)
 (1)  123/     6D8 : 0000 0110           	dc.l	$00000110
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 15 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 15 - 7/13/2025 17:31:55
 
 
 (1)  124/     6DC : 0000 1100           	dc.l	$00001100
@@ -943,7 +943,7 @@
 (1)  181/     7C0 : 0111 1100           	dc.l	$01111100
 (1)  182/     7C4 : 0110 0110           	dc.l	$01100110
 (1)  183/     7C8 : 0110 0110           	dc.l	$01100110
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 16 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 16 - 7/13/2025 17:31:55
 
 
 (1)  184/     7CC : 0011 1100           	dc.l	$00111100
@@ -1006,7 +1006,7 @@
 (1)  241/     8B0 : 0000 0000           	dc.l	$00000000
 (1)  242/     8B4 : 0110 0000           	dc.l	$01100000	;	Tile (col 04, row 0)
 (1)  243/     8B8 : 0011 0000           	dc.l	$00110000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 17 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 17 - 7/13/2025 17:31:55
 
 
 (1)  244/     8BC : 0001 1000           	dc.l	$00011000
@@ -1069,7 +1069,7 @@
 (1)  301/     9A0 : 0111 1100           	dc.l	$01111100
 (1)  302/     9A4 : 0110 0000           	dc.l	$01100000
 (1)  303/     9A8 : 0110 0000           	dc.l	$01100000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 18 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 18 - 7/13/2025 17:31:55
 
 
 (1)  304/     9AC : 0111 1110           	dc.l	$01111110
@@ -1132,7 +1132,7 @@
 (1)  361/     A90 : 0000 0000           	dc.l	$00000000
 (1)  362/     A94 : 0000 0000           	dc.l	$00000000	;	Tile (col 01, row 1)
 (1)  363/     A98 : 0110 0011           	dc.l	$01100011
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 19 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 19 - 7/13/2025 17:31:55
 
 
 (1)  364/     A9C : 0111 0111           	dc.l	$01110111
@@ -1195,7 +1195,7 @@
 (1)  421/     B80 : 0001 1000           	dc.l	$00011000
 (1)  422/     B84 : 0001 1000           	dc.l	$00011000
 (1)  423/     B88 : 0001 1000           	dc.l	$00011000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 20 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 20 - 7/13/2025 17:31:55
 
 
 (1)  424/     B8C : 0001 1000           	dc.l	$00011000
@@ -1258,7 +1258,7 @@
 (1)  481/     C70 : 0000 0000           	dc.l	$00000000
 (1)  482/     C74 : 0000 0000           	dc.l	$00000000	;	Tile (col 01, row 1)
 (1)  483/     C78 : 0100 0000           	dc.l	$01000000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 21 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 21 - 7/13/2025 17:31:55
 
 
 (1)  484/     C7C : 0110 0000           	dc.l	$01100000
@@ -1321,7 +1321,7 @@
 (1)  541/     D60 : 0110 0000           	dc.l	$01100000
 (1)  542/     D64 : 0110 0000           	dc.l	$01100000
 (1)  543/     D68 : 0110 0000           	dc.l	$01100000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 22 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 22 - 7/13/2025 17:31:55
 
 
 (1)  544/     D6C : 0011 1100           	dc.l	$00111100
@@ -1384,7 +1384,7 @@
 (1)  601/     E50 : 0011 1100           	dc.l	$00111100
 (1)  602/     E54 : 0000 0000           	dc.l	$00000000	;	Tile (col 00, row 4)
 (1)  603/     E58 : 0110 0000           	dc.l	$01100000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 23 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 23 - 7/13/2025 17:31:55
 
 
 (1)  604/     E5C : 0110 0000           	dc.l	$01100000
@@ -1447,7 +1447,7 @@
 (1)  661/     F40 : 0110 0110           	dc.l	$01100110
 (1)  662/     F44 : 0110 0000           	dc.l	$01100000
 (1)  663/     F48 : 0110 0000           	dc.l	$01100000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 24 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 24 - 7/13/2025 17:31:55
 
 
 (1)  664/     F4C : 0110 0000           	dc.l	$01100000
@@ -1510,7 +1510,7 @@
 (1)  721/    1030 : 0111 1000           	dc.l	$01111000
 (1)  722/    1034 : 0000 0000           	dc.l	$00000000	;	Tile (col 00, row 5)
 (1)  723/    1038 : 0000 0000           	dc.l	$00000000
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 25 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Body Font.asm) - Page 25 - 7/13/2025 17:31:55
 
 
 (1)  724/    103C : 0111 1110           	dc.l	$01111110
@@ -1573,7 +1573,7 @@
 (1)    4/    10F4 :                             endm
 (1)    4/    10F4 : 33                          dc.b    (substr("Systems Presentation: 68k vs x86", i, 1) - $20)
 (1)    4/    10F5 : =$1                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 26 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 26 - 7/13/2025 17:31:55
 
 
 (1)    4/    10F5 : 59                          dc.b    (substr("Systems Presentation: 68k vs x86", i, 1) - $20)
@@ -1636,7 +1636,7 @@
 (1)    4/    1112 : =$1E                i       set i + 1
 (1)    4/    1112 : 18                          dc.b    (substr("Systems Presentation: 68k vs x86", i, 1) - $20)
 (1)    4/    1113 : =$1F                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 27 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 27 - 7/13/2025 17:31:55
 
 
 (1)    4/    1113 : 16                          dc.b    (substr("Systems Presentation: 68k vs x86", i, 1) - $20)
@@ -1699,7 +1699,7 @@
 (1)    5/    112C : 00                          dc.b    (substr("In today's lesson we are going to cover:", i, 1) - $20)
 (1)    5/    112D : =$19                i       set i + 1
 (1)    5/    112D : 47                          dc.b    (substr("In today's lesson we are going to cover:", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 28 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 28 - 7/13/2025 17:31:55
 
 
 (1)    5/    112E : =$1A                i       set i + 1
@@ -1762,7 +1762,7 @@
 (1)    6/    1147 : =$B                 i       set i + 1
 (1)    6/    1147 : 16                          dc.b    (substr("- Motorola 68000, a 16/32-bit CPU", i, 1) - $20)
 (1)    6/    1148 : =$C                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 29 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 29 - 7/13/2025 17:31:55
 
 
 (1)    6/    1148 : 18                          dc.b    (substr("- Motorola 68000, a 16/32-bit CPU", i, 1) - $20)
@@ -1825,7 +1825,7 @@
 (1)    7/    1161 : 54                          dc.b    (substr("- Intel 8086, a 16-bit CPU", i, 1) - $20)
 (1)    7/    1162 : =$5                 i       set i + 1
 (1)    7/    1162 : 45                          dc.b    (substr("- Intel 8086, a 16-bit CPU", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 30 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 30 - 7/13/2025 17:31:55
 
 
 (1)    7/    1163 : =$6                 i       set i + 1
@@ -1888,7 +1888,7 @@
 (1)    8/    117C : =$5                 i       set i + 1
 (1)    8/    117C : 00                          dc.b    (substr("Which topics?", i, 1) - $20)
 (1)    8/    117D : =$6                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 31 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 31 - 7/13/2025 17:31:55
 
 
 (1)    8/    117D : 54                          dc.b    (substr("Which topics?", i, 1) - $20)
@@ -1951,7 +1951,7 @@
 (1)    9/    1196 : 42                          dc.b    (substr("- Introduction to both CPUs (age, specs)", i, 1) - $20)
 (1)    9/    1197 : =$13                i       set i + 1
 (1)    9/    1197 : 4F                          dc.b    (substr("- Introduction to both CPUs (age, specs)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 32 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 32 - 7/13/2025 17:31:55
 
 
 (1)    9/    1198 : =$14                i       set i + 1
@@ -2014,7 +2014,7 @@
 (1)   10/    11B1 : =$5                 i       set i + 1
 (1)   10/    11B1 : 50                          dc.b    (substr("- Compare the architectures", i, 1) - $20)
 (1)   10/    11B2 : =$6                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 33 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 33 - 7/13/2025 17:31:55
 
 
 (1)   10/    11B2 : 41                          dc.b    (substr("- Compare the architectures", i, 1) - $20)
@@ -2077,7 +2077,7 @@
 (1)   11/    11CB : 53                          dc.b    (substr("- Instruction set differences (assembly)", i, 1) - $20)
 (1)   11/    11CC : =$5                 i       set i + 1
 (1)   11/    11CC : 54                          dc.b    (substr("- Instruction set differences (assembly)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 34 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 34 - 7/13/2025 17:31:55
 
 
 (1)   11/    11CD : =$6                 i       set i + 1
@@ -2140,7 +2140,7 @@
 (1)   11/    11E9 : 45                          dc.b    (substr("- Instruction set differences (assembly)", i, 1) - $20)
 (1)   11/    11EA : =$23                i       set i + 1
 (1)   11/    11EA : 4D                          dc.b    (substr("- Instruction set differences (assembly)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 35 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 35 - 7/13/2025 17:31:55
 
 
 (1)   11/    11EB : =$24                i       set i + 1
@@ -2203,7 +2203,7 @@
 (1)   12/    1204 : =$15                i       set i + 1
 (1)   12/    1204 : 4E                          dc.b    (substr("- Some practice (coding with the 68k)", i, 1) - $20)
 (1)   12/    1205 : =$16                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 36 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 36 - 7/13/2025 17:31:55
 
 
 (1)   12/    1205 : 47                          dc.b    (substr("- Some practice (coding with the 68k)", i, 1) - $20)
@@ -2266,7 +2266,7 @@
 (1)   13/    121E : 4F                          dc.b    (substr("- Conclusions (Q&A)", i, 1) - $20)
 (1)   13/    121F : =$B                 i       set i + 1
 (1)   13/    121F : 4E                          dc.b    (substr("- Conclusions (Q&A)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 37 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 37 - 7/13/2025 17:31:55
 
 
 (1)   13/    1220 : =$C                 i       set i + 1
@@ -2329,7 +2329,7 @@
 (1)   15/    1238 : 48                          dc.b    (substr("Looking Towards the 8086's Backstory", i, 1) - $20)
 (1)   15/    1239 : =$12                i       set i + 1
 (1)   15/    1239 : 45                          dc.b    (substr("Looking Towards the 8086's Backstory", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 38 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 38 - 7/13/2025 17:31:55
 
 
 (1)   15/    123A : =$13                i       set i + 1
@@ -2392,7 +2392,7 @@
 (1)   16/    1253 : =$8                 i       set i + 1
 (1)   16/    1253 : 1A                          dc.b    (substr("Launched: 1978 - Discontinued: 1998", i, 1) - $20)
 (1)   16/    1254 : =$9                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 39 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 39 - 7/13/2025 17:31:55
 
 
 (1)   16/    1254 : 00                          dc.b    (substr("Launched: 1978 - Discontinued: 1998", i, 1) - $20)
@@ -2455,7 +2455,7 @@
 (1)   17/    126E :                     i       set i + 1
 (1)   17/    126E :                             endm
 (1)   17/    126E : 29                          dc.b    (substr("It raised the x86 architecture,", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 40 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 40 - 7/13/2025 17:31:55
 
 
 (1)   17/    126F : =$1                 i       set i + 1
@@ -2518,7 +2518,7 @@
 (1)   17/    128B : 45                          dc.b    (substr("It raised the x86 architecture,", i, 1) - $20)
 (1)   17/    128C : =$1E                i       set i + 1
 (1)   17/    128C : 0C                          dc.b    (substr("It raised the x86 architecture,", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 41 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 41 - 7/13/2025 17:31:55
 
 
 (1)   17/    128D : =$1F                i       set i + 1
@@ -2581,7 +2581,7 @@
 (1)   18/    12A6 : =$19                i       set i + 1
 (1)   18/    12A6 : 59                          dc.b    (substr("which is what we use today on computers.", i, 1) - $20)
 (1)   18/    12A7 : =$1A                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 42 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 42 - 7/13/2025 17:31:55
 
 
 (1)   18/    12A7 : 00                          dc.b    (substr("which is what we use today on computers.", i, 1) - $20)
@@ -2644,7 +2644,7 @@
 (1)   19/    12C0 : 45                          dc.b    (substr("For the time,", i, 1) - $20)
 (1)   19/    12C1 : =$C                 i       set i + 1
 (1)   19/    12C1 : 0C                          dc.b    (substr("For the time,", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 43 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 43 - 7/13/2025 17:31:55
 
 
 (1)   19/    12C2 : =$D                 i       set i + 1
@@ -2707,7 +2707,7 @@
 (1)   20/    12DB : =$19                i       set i + 1
 (1)   20/    12DB : 49                          dc.b    (substr("the original IBM PC used it.", i, 1) - $20)
 (1)   20/    12DC : =$1A                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 44 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 44 - 7/13/2025 17:31:55
 
 
 (1)   20/    12DC : 54                          dc.b    (substr("the original IBM PC used it.", i, 1) - $20)
@@ -2770,7 +2770,7 @@
 (1)   21/    12F5 : 53                          dc.b    (substr("Technical Specifications", i, 1) - $20)
 (1)   21/    12F6 : =$18                i       set i + 1
 (1)   21/    12F6 :                     
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 45 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 45 - 7/13/2025 17:31:55
 
 
 (1)   22/    12F6 : (MACRO)[554]        	String17:	dfntxt "Instruction set: x86-16"
@@ -2833,7 +2833,7 @@
 (1)   23/    130D :                     i       set i + 1
 (1)   23/    130D :                             endm
 (1)   23/    130D : 34                          dc.b    (substr("Transistors: 29000", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 46 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 46 - 7/13/2025 17:31:55
 
 
 (1)   23/    130E : =$1                 i       set i + 1
@@ -2896,7 +2896,7 @@
 (1)   24/    1327 : =$8                 i       set i + 1
 (1)   24/    1327 : 47                          dc.b    (substr("Technology node: 3000 nm", i, 1) - $20)
 (1)   24/    1328 : =$9                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 47 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 47 - 7/13/2025 17:31:55
 
 
 (1)   24/    1328 : 59                          dc.b    (substr("Technology node: 3000 nm", i, 1) - $20)
@@ -2959,7 +2959,7 @@
 (1)   25/    1341 : 45                          dc.b    (substr("Clock ranges: 5 - 10 MHz", i, 1) - $20)
 (1)   25/    1342 : =$B                 i       set i + 1
 (1)   25/    1342 : 53                          dc.b    (substr("Clock ranges: 5 - 10 MHz", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 48 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 48 - 7/13/2025 17:31:55
 
 
 (1)   25/    1343 : =$C                 i       set i + 1
@@ -3022,7 +3022,7 @@
 (1)   27/    135B : 22                          dc.b    (substr("The History Behind the 68000", i, 1) - $20)
 (1)   27/    135C : =$D                 i       set i + 1
 (1)   27/    135C : 45                          dc.b    (substr("The History Behind the 68000", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 49 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 49 - 7/13/2025 17:31:55
 
 
 (1)   27/    135D : =$E                 i       set i + 1
@@ -3085,7 +3085,7 @@
 (1)   28/    1376 : =$B                 i       set i + 1
 (1)   28/    1376 : 19                          dc.b    (substr("Launched: 1979 - Discontinued: 1996", i, 1) - $20)
 (1)   28/    1377 : =$C                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 50 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 50 - 7/13/2025 17:31:55
 
 
 (1)   28/    1377 : 17                          dc.b    (substr("Launched: 1979 - Discontinued: 1996", i, 1) - $20)
@@ -3148,7 +3148,7 @@
 (1)   29/    1390 : 00                          dc.b    (substr("It lies on its own architecture,", i, 1) - $20)
 (1)   29/    1391 : =$3                 i       set i + 1
 (1)   29/    1391 : 4C                          dc.b    (substr("It lies on its own architecture,", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 51 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 51 - 7/13/2025 17:31:55
 
 
 (1)   29/    1392 : =$4                 i       set i + 1
@@ -3211,7 +3211,7 @@
 (1)   29/    13AE :                     
 (1)   30/    13AE : (MACRO)[752]        	String24:	dfntxt "the Motorola 68000 one,"
 (1)   30/    13AE : =$0                 i       set     0
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 52 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 52 - 7/13/2025 17:31:55
 
 
 (1)   30/    13AE :                             while i < strlen("the Motorola 68000 one,")
@@ -3274,7 +3274,7 @@
 (1)   31/    13C5 : 57                          dc.b    (substr("which is a still-in-use standard.", i, 1) - $20)
 (1)   31/    13C6 : =$1                 i       set i + 1
 (1)   31/    13C6 : 48                          dc.b    (substr("which is a still-in-use standard.", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 53 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 53 - 7/13/2025 17:31:55
 
 
 (1)   31/    13C7 : =$2                 i       set i + 1
@@ -3337,7 +3337,7 @@
 (1)   31/    13E3 : 52                          dc.b    (substr("which is a still-in-use standard.", i, 1) - $20)
 (1)   31/    13E4 : =$1F                i       set i + 1
 (1)   31/    13E4 : 44                          dc.b    (substr("which is a still-in-use standard.", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 54 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 54 - 7/13/2025 17:31:55
 
 
 (1)   31/    13E5 : =$20                i       set i + 1
@@ -3400,7 +3400,7 @@
 (1)   32/    13FE : =$18                i       set i + 1
 (1)   32/    13FE : 29                          dc.b    (substr("It was widely used in GUI PCs, including", i, 1) - $20)
 (1)   32/    13FF : =$19                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 55 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 55 - 7/13/2025 17:31:55
 
 
 (1)   32/    13FF : 00                          dc.b    (substr("It was widely used in GUI PCs, including", i, 1) - $20)
@@ -3463,7 +3463,7 @@
 (1)   33/    1418 : 43                          dc.b    (substr("several Macintosh machines,", i, 1) - $20)
 (1)   33/    1419 : =$B                 i       set i + 1
 (1)   33/    1419 : 49                          dc.b    (substr("several Macintosh machines,", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 56 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 56 - 7/13/2025 17:31:55
 
 
 (1)   33/    141A : =$C                 i       set i + 1
@@ -3526,7 +3526,7 @@
 (1)   34/    1433 : =$A                 i       set i + 1
 (1)   34/    1433 : 44                          dc.b    (substr("the (Commodore) Amiga,", i, 1) - $20)
 (1)   34/    1434 : =$B                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 57 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 57 - 7/13/2025 17:31:55
 
 
 (1)   34/    1434 : 4F                          dc.b    (substr("the (Commodore) Amiga,", i, 1) - $20)
@@ -3589,7 +3589,7 @@
 (1)   36/    144C : =$0                 i       set     0
 (1)   36/    144C :                             while i < strlen("the (Sharp) X68000.")
 (1)   36/    144C :                             dc.b    (substr("the (Sharp) X68000.", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 58 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 58 - 7/13/2025 17:31:55
 
 
 (1)   36/    144C :                     i       set i + 1
@@ -3652,7 +3652,7 @@
 (1)   37/    1464 : 4E                          dc.b    (substr("You know what?", i, 1) - $20)
 (1)   37/    1465 : =$6                 i       set i + 1
 (1)   37/    1465 : 4F                          dc.b    (substr("You know what?", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 59 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 59 - 7/13/2025 17:31:55
 
 
 (1)   37/    1466 : =$7                 i       set i + 1
@@ -3715,7 +3715,7 @@
 (1)   38/    147F : =$12                i       set i + 1
 (1)   38/    147F : 53                          dc.b    (substr("This videogame console is", i, 1) - $20)
 (1)   38/    1480 : =$13                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 60 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 60 - 7/13/2025 17:31:55
 
 
 (1)   38/    1480 : 4F                          dc.b    (substr("This videogame console is", i, 1) - $20)
@@ -3778,7 +3778,7 @@
 (1)   40/    1496 : =$3                 i       set i + 1
 (1)   40/    1496 : 54                          dc.b    (substr("by this CPU!", i, 1) - $20)
 (1)   40/    1497 : =$4                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 61 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 61 - 7/13/2025 17:31:55
 
 
 (1)   40/    1497 : 48                          dc.b    (substr("by this CPU!", i, 1) - $20)
@@ -3841,7 +3841,7 @@
 (1)   41/    14B0 : 43                          dc.b    (substr("Technical Specifications", i, 1) - $20)
 (1)   41/    14B1 : =$12                i       set i + 1
 (1)   41/    14B1 : 41                          dc.b    (substr("Technical Specifications", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 62 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 62 - 7/13/2025 17:31:55
 
 
 (1)   41/    14B2 : =$13                i       set i + 1
@@ -3904,7 +3904,7 @@
 (1)   42/    14CB : =$14                i       set i + 1
 (1)   42/    14CB : 4F                          dc.b    (substr("Instruction set: Motorola 68000 series", i, 1) - $20)
 (1)   42/    14CC : =$15                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 63 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 63 - 7/13/2025 17:31:55
 
 
 (1)   42/    14CC : 52                          dc.b    (substr("Instruction set: Motorola 68000 series", i, 1) - $20)
@@ -3967,7 +3967,7 @@
 (1)   43/    14E5 : 4F                          dc.b    (substr("Transistors: 68000 (hence the name)", i, 1) - $20)
 (1)   43/    14E6 : =$9                 i       set i + 1
 (1)   43/    14E6 : 52                          dc.b    (substr("Transistors: 68000 (hence the name)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 64 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 64 - 7/13/2025 17:31:55
 
 
 (1)   43/    14E7 : =$A                 i       set i + 1
@@ -4030,7 +4030,7 @@
 (1)   44/    1500 :                             endm
 (1)   44/    1500 : 34                          dc.b    (substr("Technology node: 3500 nm", i, 1) - $20)
 (1)   44/    1501 : =$1                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 65 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 65 - 7/13/2025 17:31:55
 
 
 (1)   44/    1501 : 45                          dc.b    (substr("Technology node: 3500 nm", i, 1) - $20)
@@ -4093,7 +4093,7 @@
 (1)   45/    151A : 4F                          dc.b    (substr("Clock ranges: 4 MHz - 16,67 MHz", i, 1) - $20)
 (1)   45/    151B : =$3                 i       set i + 1
 (1)   45/    151B : 43                          dc.b    (substr("Clock ranges: 4 MHz - 16,67 MHz", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 66 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 66 - 7/13/2025 17:31:55
 
 
 (1)   45/    151C : =$4                 i       set i + 1
@@ -4156,7 +4156,7 @@
 (1)   47/    1537 : (MACRO)[1177]       	String40:	dfntxt "Architecture Comparison"
 (1)   47/    1537 : =$0                 i       set     0
 (1)   47/    1537 :                             while i < strlen("Architecture Comparison")
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 67 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 67 - 7/13/2025 17:31:55
 
 
 (1)   47/    1537 :                             dc.b    (substr("Architecture Comparison", i, 1) - $20)
@@ -4219,7 +4219,7 @@
 (1)   48/    154F : =$1                 i       set i + 1
 (1)   48/    154F : 4E                          dc.b    (substr("Intel 8086 Contents and Syntax", i, 1) - $20)
 (1)   48/    1550 : =$2                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 68 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 68 - 7/13/2025 17:31:55
 
 
 (1)   48/    1550 : 54                          dc.b    (substr("Intel 8086 Contents and Syntax", i, 1) - $20)
@@ -4282,7 +4282,7 @@
 (1)   49/    156C : (MACRO)[1234]       	String42:	dfntxt "General purpose registers:"
 (1)   49/    156C : =$0                 i       set     0
 (1)   49/    156C :                             while i < strlen("General purpose registers:")
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 69 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 69 - 7/13/2025 17:31:55
 
 
 (1)   49/    156C :                             dc.b    (substr("General purpose registers:", i, 1) - $20)
@@ -4345,7 +4345,7 @@
 (1)   50/    1586 : =$0                 i       set     0
 (1)   50/    1586 :                             while i < strlen("16-bit")
 (1)   50/    1586 :                             dc.b    (substr("16-bit", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 70 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 70 - 7/13/2025 17:31:55
 
 
 (1)   50/    1586 :                     i       set i + 1
@@ -4408,7 +4408,7 @@
 (1)   51/    159E : 00                          dc.b    (substr("AX    [BX]    CX     DX", i, 1) - $20)
 (1)   51/    159F : =$13                i       set i + 1
 (1)   51/    159F : 00                          dc.b    (substr("AX    [BX]    CX     DX", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 71 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 71 - 7/13/2025 17:31:55
 
 
 (1)   51/    15A0 : =$14                i       set i + 1
@@ -4471,7 +4471,7 @@
 (1)   52/    15B9 : =$16                i       set i + 1
 (1)   52/    15B9 : 3F                          dc.b    (substr("|____| |____| |____| |____|", i, 1) - $20)
 (1)   52/    15BA : =$17                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 72 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 72 - 7/13/2025 17:31:55
 
 
 (1)   52/    15BA : 3F                          dc.b    (substr("|____| |____| |____| |____|", i, 1) - $20)
@@ -4534,7 +4534,7 @@
 (1)   53/    15D3 : 5C                          dc.b    (substr("|      |      |      |", i, 1) - $20)
 (1)   53/    15D4 : =$16                i       set i + 1
 (1)   53/    15D4 :                     
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 73 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 73 - 7/13/2025 17:31:55
 
 
 (1)   54/    15D4 : (MACRO)[1348]       	String47:	dfntxt "AH AL  BH BL  CH CL  DH DL"
@@ -4597,7 +4597,7 @@
 (1)   54/    15EE : =$1A                i       set i + 1
 (1)   54/    15EE :                     
 (1)   55/    15EE : (MACRO)[1376]       	String48:	dfntxt "8-bit"
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 74 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 74 - 7/13/2025 17:31:55
 
 
 (1)   55/    15EE : =$0                 i       set     0
@@ -4660,7 +4660,7 @@
 (1)   57/    1601 : 29                          dc.b    (substr("[SI]  [DI]  [BP]  [SP]  [IP]", i, 1) - $20)
 (1)   57/    1602 : =$9                 i       set i + 1
 (1)   57/    1602 : 3D                          dc.b    (substr("[SI]  [DI]  [BP]  [SP]  [IP]", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 75 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 75 - 7/13/2025 17:31:55
 
 
 (1)   57/    1603 : =$A                 i       set i + 1
@@ -4723,7 +4723,7 @@
 (1)   58/    161C : =$7                 i       set i + 1
 (1)   58/    161C : 10                          dc.b    (substr("MOV BX,0200", i, 1) - $20)
 (1)   58/    161D : =$8                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 76 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 76 - 7/13/2025 17:31:55
 
 
 (1)   58/    161D : 12                          dc.b    (substr("MOV BX,0200", i, 1) - $20)
@@ -4786,7 +4786,7 @@
 (1)   60/    1633 : =$8                 i       set i + 1
 (1)   60/    1633 : 52                          dc.b    (substr("Segment registers:", i, 1) - $20)
 (1)   60/    1634 : =$9                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 77 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 77 - 7/13/2025 17:31:55
 
 
 (1)   60/    1634 : 45                          dc.b    (substr("Segment registers:", i, 1) - $20)
@@ -4849,7 +4849,7 @@
 (1)   62/    164B :                             dc.b    (substr("Flags:", i, 1) - $20)
 (1)   62/    164B :                     i       set i + 1
 (1)   62/    164B :                             endm
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 78 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 78 - 7/13/2025 17:31:55
 
 
 (1)   62/    164B : 26                          dc.b    (substr("Flags:", i, 1) - $20)
@@ -4912,7 +4912,7 @@
 (1)   65/    1660 : 45                          dc.b    (substr("Architecture Comparison", i, 1) - $20)
 (1)   65/    1661 : =$7                 i       set i + 1
 (1)   65/    1661 : 43                          dc.b    (substr("Architecture Comparison", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 79 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 79 - 7/13/2025 17:31:55
 
 
 (1)   65/    1662 : =$8                 i       set i + 1
@@ -4975,7 +4975,7 @@
 (1)   66/    167B : =$A                 i       set i + 1
 (1)   66/    167B : 18                          dc.b    (substr("Motorola 68000 Contents and Syntax", i, 1) - $20)
 (1)   66/    167C : =$B                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 80 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 80 - 7/13/2025 17:31:55
 
 
 (1)   66/    167C : 10                          dc.b    (substr("Motorola 68000 Contents and Syntax", i, 1) - $20)
@@ -5038,7 +5038,7 @@
 (1)   67/    1695 : 54                          dc.b    (substr("Data registers (general purpose):", i, 1) - $20)
 (1)   67/    1696 : =$3                 i       set i + 1
 (1)   67/    1696 : 41                          dc.b    (substr("Data registers (general purpose):", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 81 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 81 - 7/13/2025 17:31:55
 
 
 (1)   67/    1697 : =$4                 i       set i + 1
@@ -5101,7 +5101,7 @@
 (1)   67/    16B3 : 1A                          dc.b    (substr("Data registers (general purpose):", i, 1) - $20)
 (1)   67/    16B4 : =$21                i       set i + 1
 (1)   67/    16B4 :                     
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 82 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 82 - 7/13/2025 17:31:55
 
 
 (1)   68/    16B4 : (MACRO)[1598]       	String60:	dfntxt "32-bit"
@@ -5164,7 +5164,7 @@
 (1)   69/    16CA : 44                          dc.b    (substr("d0  d1  d2  d3  d4  d5  d6  d7", i, 1) - $20)
 (1)   69/    16CB : =$11                i       set i + 1
 (1)   69/    16CB : 14                          dc.b    (substr("d0  d1  d2  d3  d4  d5  d6  d7", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 83 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 83 - 7/13/2025 17:31:55
 
 
 (1)   69/    16CC : =$12                i       set i + 1
@@ -5227,7 +5227,7 @@
 (1)   70/    16E5 : =$D                 i       set i + 1
 (1)   70/    16E5 : 54                          dc.b    (substr("Address registers:", i, 1) - $20)
 (1)   70/    16E6 : =$E                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 84 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 84 - 7/13/2025 17:31:55
 
 
 (1)   70/    16E6 : 45                          dc.b    (substr("Address registers:", i, 1) - $20)
@@ -5290,7 +5290,7 @@
 (1)   72/    16FC : =$C                 i       set i + 1
 (1)   72/    16FC : 08                          dc.b    (substr("(a0)(a1)(a2)(a3)(a4)(a5)(a6)", i, 1) - $20)
 (1)   72/    16FD : =$D                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 85 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 85 - 7/13/2025 17:31:55
 
 
 (1)   72/    16FD : 41                          dc.b    (substr("(a0)(a1)(a2)(a3)(a4)(a5)(a6)", i, 1) - $20)
@@ -5353,7 +5353,7 @@
 (1)   73/    1716 : 50                          dc.b    (substr("(a7) -> (sp) - not general purpose", i, 1) - $20)
 (1)   73/    1717 : =$B                 i       set i + 1
 (1)   73/    1717 : 09                          dc.b    (substr("(a7) -> (sp) - not general purpose", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 86 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 86 - 7/13/2025 17:31:55
 
 
 (1)   73/    1718 : =$C                 i       set i + 1
@@ -5416,7 +5416,7 @@
 (1)   74/    1731 : =$3                 i       set i + 1
 (1)   74/    1731 : 09                          dc.b    (substr("(ss)(us) - not really necessary", i, 1) - $20)
 (1)   74/    1732 : =$4                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 87 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 87 - 7/13/2025 17:31:55
 
 
 (1)   74/    1732 : 08                          dc.b    (substr("(ss)(us) - not really necessary", i, 1) - $20)
@@ -5479,7 +5479,7 @@
 (1)   75/    174D :                             while i < strlen("(pc) - basically the same as [IP]")
 (1)   75/    174D :                             dc.b    (substr("(pc) - basically the same as [IP]", i, 1) - $20)
 (1)   75/    174D :                     i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 88 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 88 - 7/13/2025 17:31:55
 
 
 (1)   75/    174D :                             endm
@@ -5542,7 +5542,7 @@
 (1)   75/    1769 : 00                          dc.b    (substr("(pc) - basically the same as [IP]", i, 1) - $20)
 (1)   75/    176A : =$1D                i       set i + 1
 (1)   75/    176A : 3B                          dc.b    (substr("(pc) - basically the same as [IP]", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 89 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 89 - 7/13/2025 17:31:55
 
 
 (1)   75/    176B : =$1E                i       set i + 1
@@ -5605,7 +5605,7 @@
 (1)   76/    1784 : =$16                i       set i + 1
 (1)   76/    1784 : 48                          dc.b    (substr("Note: for addressing the", i, 1) - $20)
 (1)   76/    1785 : =$17                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 90 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 90 - 7/13/2025 17:31:55
 
 
 (1)   76/    1785 : 45                          dc.b    (substr("Note: for addressing the", i, 1) - $20)
@@ -5668,7 +5668,7 @@
 (1)   77/    179E : 45                          dc.b    (substr("round brackets () are used instead.", i, 1) - $20)
 (1)   77/    179F : =$19                i       set i + 1
 (1)   77/    179F : 44                          dc.b    (substr("round brackets () are used instead.", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 91 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 91 - 7/13/2025 17:31:55
 
 
 (1)   77/    17A0 : =$1A                i       set i + 1
@@ -5731,7 +5731,7 @@
 (1)   78/    17B9 : =$10                i       set i + 1
 (1)   78/    17B9 : 43                          dc.b    (substr("Flags (register ccr):", i, 1) - $20)
 (1)   78/    17BA : =$11                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 92 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 92 - 7/13/2025 17:31:55
 
 
 (1)   78/    17BA : 43                          dc.b    (substr("Flags (register ccr):", i, 1) - $20)
@@ -5794,7 +5794,7 @@
 (1)   81/    17CF : 33                          dc.b    (substr("Instruction Set Differences", i, 1) - $20)
 (1)   81/    17D0 : =$D                 i       set i + 1
 (1)   81/    17D0 : 45                          dc.b    (substr("Instruction Set Differences", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 93 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 93 - 7/13/2025 17:31:55
 
 
 (1)   81/    17D1 : =$E                 i       set i + 1
@@ -5857,7 +5857,7 @@
 (1)   82/    17EA : =$C                 i       set i + 1
 (1)   82/    17EA : 44                          dc.b    (substr("How to MOVe data around", i, 1) - $20)
 (1)   82/    17EB : =$D                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 94 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 94 - 7/13/2025 17:31:55
 
 
 (1)   82/    17EB : 41                          dc.b    (substr("How to MOVe data around", i, 1) - $20)
@@ -5920,7 +5920,7 @@
 (1)   84/    1801 : =$2                 i       set i + 1
 (1)   84/    1801 : 0D                          dc.b    (substr("16-bit values (0-FFFF)", i, 1) - $20)
 (1)   84/    1802 : =$3                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 95 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 95 - 7/13/2025 17:31:55
 
 
 (1)   84/    1802 : 42                          dc.b    (substr("16-bit values (0-FFFF)", i, 1) - $20)
@@ -5983,7 +5983,7 @@
 (1)   85/    181B : 0C                          dc.b    (substr("MOV CX,37D5", i, 1) - $20)
 (1)   85/    181C : =$7                 i       set i + 1
 (1)   85/    181C : 13                          dc.b    (substr("MOV CX,37D5", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 96 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 96 - 7/13/2025 17:31:55
 
 
 (1)   85/    181D : =$8                 i       set i + 1
@@ -6046,7 +6046,7 @@
 (1)   87/    1832 : 38                          dc.b    (substr("MOV BX,[BX]", i, 1) - $20)
 (1)   87/    1833 : =$6                 i       set i + 1
 (1)   87/    1833 : 0C                          dc.b    (substr("MOV BX,[BX]", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 97 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 97 - 7/13/2025 17:31:55
 
 
 (1)   87/    1834 : =$7                 i       set i + 1
@@ -6109,7 +6109,7 @@
 (1)   89/    1849 : 56                          dc.b    (substr("8-bit values (0-FF)", i, 1) - $20)
 (1)   89/    184A : =$7                 i       set i + 1
 (1)   89/    184A : 41                          dc.b    (substr("8-bit values (0-FF)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 98 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 98 - 7/13/2025 17:31:55
 
 
 (1)   89/    184B : =$8                 i       set i + 1
@@ -6172,7 +6172,7 @@
 (1)   91/    1863 : (MACRO)[2073]       	String82:	dfntxt "MOV DL,AX"
 (1)   91/    1863 : =$0                 i       set     0
 (1)   91/    1863 :                             while i < strlen("MOV DL,AX")
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 99 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 99 - 7/13/2025 17:31:55
 
 
 (1)   91/    1863 :                             dc.b    (substr("MOV DL,AX", i, 1) - $20)
@@ -6235,7 +6235,7 @@
 (1)   92/    187B : =$F                 i       set i + 1
 (1)   92/    187B : 41                          dc.b    (substr("However, there are some limitations:", i, 1) - $20)
 (1)   92/    187C : =$10                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 100 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 100 - 7/13/2025 17:31:55
 
 
 (1)   92/    187C : 52                          dc.b    (substr("However, there are some limitations:", i, 1) - $20)
@@ -6298,7 +6298,7 @@
 (1)   93/    1895 : 10                          dc.b    (substr("MOV [0200],A03B", i, 1) - $20)
 (1)   93/    1896 : =$6                 i       set i + 1
 (1)   93/    1896 : 12                          dc.b    (substr("MOV [0200],A03B", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 101 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 101 - 7/13/2025 17:31:55
 
 
 (1)   93/    1897 : =$7                 i       set i + 1
@@ -6361,7 +6361,7 @@
 (1)   94/    18B0 : =$11                i       set i + 1
 (1)   94/    18B0 : 48                          dc.b    (substr("-> must specify the size", i, 1) - $20)
 (1)   94/    18B1 : =$12                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 102 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 102 - 7/13/2025 17:31:55
 
 
 (1)   94/    18B1 : 45                          dc.b    (substr("-> must specify the size", i, 1) - $20)
@@ -6424,7 +6424,7 @@
 (1)   96/    18C8 :                             dc.b    (substr("-> not possible", i, 1) - $20)
 (1)   96/    18C8 :                     i       set i + 1
 (1)   96/    18C8 :                             endm
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 103 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 103 - 7/13/2025 17:31:55
 
 
 (1)   96/    18C8 : 0D                          dc.b    (substr("-> not possible", i, 1) - $20)
@@ -6487,7 +6487,7 @@
 (1)   97/    18E1 : 18                          dc.b    (substr("Motorola 68000", i, 1) - $20)
 (1)   97/    18E2 : =$B                 i       set i + 1
 (1)   97/    18E2 : 10                          dc.b    (substr("Motorola 68000", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 104 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 104 - 7/13/2025 17:31:55
 
 
 (1)   97/    18E3 : =$C                 i       set i + 1
@@ -6550,7 +6550,7 @@
 (1)   99/    18F8 : 45                          dc.b    (substr("move.w d4,$F600", i, 1) - $20)
 (1)   99/    18F9 : =$4                 i       set i + 1
 (1)   99/    18F9 : 0E                          dc.b    (substr("move.w d4,$F600", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 105 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 105 - 7/13/2025 17:31:55
 
 
 (1)   99/    18FA : =$5                 i       set i + 1
@@ -6613,7 +6613,7 @@
 (1)  101/    1912 : (MACRO)[2268]       	String92:	dfntxt "move.w (a1),d1"
 (1)  101/    1912 : =$0                 i       set     0
 (1)  101/    1912 :                             while i < strlen("move.w (a1),d1")
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 106 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 106 - 7/13/2025 17:31:55
 
 
 (1)  101/    1912 :                             dc.b    (substr("move.w (a1),d1", i, 1) - $20)
@@ -6676,7 +6676,7 @@
 (1)  102/    192A : =$A                 i       set i + 1
 (1)  102/    192A : 23                          dc.b    (substr("move.b $0AC0,d0", i, 1) - $20)
 (1)  102/    192B : =$B                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 107 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 107 - 7/13/2025 17:31:55
 
 
 (1)  102/    192B : 10                          dc.b    (substr("move.b $0AC0,d0", i, 1) - $20)
@@ -6739,7 +6739,7 @@
 (1)  104/    1941 : =$6                 i       set i + 1
 (1)  104/    1941 : 00                          dc.b    (substr("In 68k architecture, these limits", i, 1) - $20)
 (1)  104/    1942 : =$7                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 108 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 108 - 7/13/2025 17:31:55
 
 
 (1)  104/    1942 : 41                          dc.b    (substr("In 68k architecture, these limits", i, 1) - $20)
@@ -6802,7 +6802,7 @@
 (1)  105/    195C :                     i       set i + 1
 (1)  105/    195C :                             endm
 (1)  105/    195C : 44                          dc.b    (substr("do not exist!", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 109 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 109 - 7/13/2025 17:31:55
 
 
 (1)  105/    195D : =$1                 i       set i + 1
@@ -6865,7 +6865,7 @@
 (1)  106/    1976 : =$D                 i       set i + 1
 (1)  106/    1976 : 44                          dc.b    (substr("If you noticed...", i, 1) - $20)
 (1)  106/    1977 : =$E                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 110 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 110 - 7/13/2025 17:31:55
 
 
 (1)  106/    1977 : 0E                          dc.b    (substr("If you noticed...", i, 1) - $20)
@@ -6928,7 +6928,7 @@
 (1)  108/    198D : =$2                 i       set i + 1
 (1)  108/    198D : 56                          dc.b    (substr("move.w *sour*,*dest*", i, 1) - $20)
 (1)  108/    198E : =$3                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 111 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 111 - 7/13/2025 17:31:55
 
 
 (1)  108/    198E : 45                          dc.b    (substr("move.w *sour*,*dest*", i, 1) - $20)
@@ -6991,7 +6991,7 @@
 (1)  110/    19A7 : =$8                 i       set i + 1
 (1)  110/    19A7 : 49                          dc.b    (substr("Instruction Set Differences", i, 1) - $20)
 (1)  110/    19A8 : =$9                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 112 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 112 - 7/13/2025 17:31:55
 
 
 (1)  110/    19A8 : 4F                          dc.b    (substr("Instruction Set Differences", i, 1) - $20)
@@ -7054,7 +7054,7 @@
 (1)  111/    19C1 : 50                          dc.b    (substr("68k compiler syntax and additional notes", i, 1) - $20)
 (1)  111/    19C2 : =$8                 i       set i + 1
 (1)  111/    19C2 : 49                          dc.b    (substr("68k compiler syntax and additional notes", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 113 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 113 - 7/13/2025 17:31:55
 
 
 (1)  111/    19C3 : =$9                 i       set i + 1
@@ -7117,7 +7117,7 @@
 (1)  111/    19DF : 54                          dc.b    (substr("68k compiler syntax and additional notes", i, 1) - $20)
 (1)  111/    19E0 : =$26                i       set i + 1
 (1)  111/    19E0 : 45                          dc.b    (substr("68k compiler syntax and additional notes", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 114 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 114 - 7/13/2025 17:31:55
 
 
 (1)  111/    19E1 : =$27                i       set i + 1
@@ -7180,7 +7180,7 @@
 (1)  112/    19FA : =$18                i       set i + 1
 (1)  112/    19FA : 0E                          dc.b    (substr("Operand sizes (e.g. move.l)", i, 1) - $20)
 (1)  112/    19FB : =$19                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 115 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 115 - 7/13/2025 17:31:55
 
 
 (1)  112/    19FB : 4C                          dc.b    (substr("Operand sizes (e.g. move.l)", i, 1) - $20)
@@ -7243,7 +7243,7 @@
 (1)  113/    1A14 : 18                          dc.b    (substr(".b: byte = 255 values (8-bit)", i, 1) - $20)
 (1)  113/    1A15 : =$18                i       set i + 1
 (1)  113/    1A15 : 0D                          dc.b    (substr(".b: byte = 255 values (8-bit)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 116 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 116 - 7/13/2025 17:31:55
 
 
 (1)  113/    1A16 : =$19                i       set i + 1
@@ -7306,7 +7306,7 @@
 (1)  114/    1A2F : =$15                i       set i + 1
 (1)  114/    1A2F : 45                          dc.b    (substr(".w: word = 65536 values (16-bit)", i, 1) - $20)
 (1)  114/    1A30 : =$16                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 117 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 117 - 7/13/2025 17:31:55
 
 
 (1)  114/    1A30 : 53                          dc.b    (substr(".w: word = 65536 values (16-bit)", i, 1) - $20)
@@ -7369,7 +7369,7 @@
 (1)  115/    1A49 : 19                          dc.b    (substr(".l: long = 4294967296 values! (32-bit!)", i, 1) - $20)
 (1)  115/    1A4A : =$10                i       set i + 1
 (1)  115/    1A4A : 16                          dc.b    (substr(".l: long = 4294967296 values! (32-bit!)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 118 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 118 - 7/13/2025 17:31:55
 
 
 (1)  115/    1A4B : =$11                i       set i + 1
@@ -7432,7 +7432,7 @@
 (1)  116/    1A64 : =$3                 i       set i + 1
 (1)  116/    1A64 : 45                          dc.b    (substr("Immediate values (e.g. move.w #1234,d0)", i, 1) - $20)
 (1)  116/    1A65 : =$4                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 119 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 119 - 7/13/2025 17:31:55
 
 
 (1)  116/    1A65 : 44                          dc.b    (substr("Immediate values (e.g. move.w #1234,d0)", i, 1) - $20)
@@ -7495,7 +7495,7 @@
 (1)  116/    1A82 : =$21                i       set i + 1
 (1)  116/    1A82 : 13                          dc.b    (substr("Immediate values (e.g. move.w #1234,d0)", i, 1) - $20)
 (1)  116/    1A83 : =$22                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 120 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 120 - 7/13/2025 17:31:55
 
 
 (1)  116/    1A83 : 14                          dc.b    (substr("Immediate values (e.g. move.w #1234,d0)", i, 1) - $20)
@@ -7558,7 +7558,7 @@
 (1)  117/    1A9C : 00                          dc.b    (substr("#  -> decimal number (#264873781)", i, 1) - $20)
 (1)  117/    1A9D : =$15                i       set i + 1
 (1)  117/    1A9D : 08                          dc.b    (substr("#  -> decimal number (#264873781)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 121 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 121 - 7/13/2025 17:31:55
 
 
 (1)  117/    1A9E : =$16                i       set i + 1
@@ -7621,7 +7621,7 @@
 (1)  118/    1AB7 : =$E                 i       set i + 1
 (1)  118/    1AB7 : 4D                          dc.b    (substr("#$ -> hexadecimal number (#$ABCD)", i, 1) - $20)
 (1)  118/    1AB8 : =$F                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 122 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 122 - 7/13/2025 17:31:55
 
 
 (1)  118/    1AB8 : 41                          dc.b    (substr("#$ -> hexadecimal number (#$ABCD)", i, 1) - $20)
@@ -7684,7 +7684,7 @@
 (1)  119/    1AD1 : 49                          dc.b    (substr("#% -> binary number (#%110100101)", i, 1) - $20)
 (1)  119/    1AD2 : =$8                 i       set i + 1
 (1)  119/    1AD2 : 4E                          dc.b    (substr("#% -> binary number (#%110100101)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 123 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 123 - 7/13/2025 17:31:55
 
 
 (1)  119/    1AD3 : =$9                 i       set i + 1
@@ -7747,7 +7747,7 @@
 (1)  120/    1AEC : =$1                 i       set i + 1
 (1)  120/    1AEC : 44                          dc.b    (substr("Addressing (e.g. move.l d0,$E010)", i, 1) - $20)
 (1)  120/    1AED : =$2                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 124 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 124 - 7/13/2025 17:31:55
 
 
 (1)  120/    1AED : 44                          dc.b    (substr("Addressing (e.g. move.l d0,$E010)", i, 1) - $20)
@@ -7810,7 +7810,7 @@
 (1)  120/    1B0A : =$1F                i       set i + 1
 (1)  120/    1B0A : 10                          dc.b    (substr("Addressing (e.g. move.l d0,$E010)", i, 1) - $20)
 (1)  120/    1B0B : =$20                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 125 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 125 - 7/13/2025 17:31:55
 
 
 (1)  120/    1B0B : 09                          dc.b    (substr("Addressing (e.g. move.l d0,$E010)", i, 1) - $20)
@@ -7873,7 +7873,7 @@
 (1)  121/    1B24 : 43                          dc.b    (substr("$ -> refer to memory space with address", i, 1) - $20)
 (1)  121/    1B25 : =$19                i       set i + 1
 (1)  121/    1B25 : 45                          dc.b    (substr("$ -> refer to memory space with address", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 126 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 126 - 7/13/2025 17:31:55
 
 
 (1)  121/    1B26 : =$1A                i       set i + 1
@@ -7936,7 +7936,7 @@
 (1)  122/    1B3F : =$C                 i       set i + 1
 (1)  122/    1B3F : 4F                          dc.b    (substr("()-> refer to memory space with register", i, 1) - $20)
 (1)  122/    1B40 : =$D                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 127 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 127 - 7/13/2025 17:31:55
 
 
 (1)  122/    1B40 : 00                          dc.b    (substr("()-> refer to memory space with register", i, 1) - $20)
@@ -7999,7 +7999,7 @@
 (1)  123/    1B5B :                             while i < strlen("This CPU is a little inefficient, though")
 (1)  123/    1B5B :                             dc.b    (substr("This CPU is a little inefficient, though", i, 1) - $20)
 (1)  123/    1B5B :                     i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 128 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 128 - 7/13/2025 17:31:55
 
 
 (1)  123/    1B5B :                             endm
@@ -8062,7 +8062,7 @@
 (1)  123/    1B77 : 49                          dc.b    (substr("This CPU is a little inefficient, though", i, 1) - $20)
 (1)  123/    1B78 : =$1D                i       set i + 1
 (1)  123/    1B78 : 45                          dc.b    (substr("This CPU is a little inefficient, though", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 129 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 129 - 7/13/2025 17:31:55
 
 
 (1)  123/    1B79 : =$1E                i       set i + 1
@@ -8125,7 +8125,7 @@
 (1)  125/    1B8F :                     i       set i + 1
 (1)  125/    1B8F :                             endm
 (1)  125/    1B8F : 0D                          dc.b    (substr("-> 4 cycles", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 130 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 130 - 7/13/2025 17:31:55
 
 
 (1)  125/    1B90 : =$1                 i       set i + 1
@@ -8188,7 +8188,7 @@
 (1)  126/    1BA9 : =$F                 i       set i + 1
 (1)  126/    1BA9 : 18                          dc.b    (substr("move.l #12345678,d0", i, 1) - $20)
 (1)  126/    1BAA : =$10                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 131 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 131 - 7/13/2025 17:31:55
 
 
 (1)  126/    1BAA : 0C                          dc.b    (substr("move.l #12345678,d0", i, 1) - $20)
@@ -8251,7 +8251,7 @@
 (1)  128/    1BC0 : =$6                 i       set i + 1
 (1)  128/    1BC0 : 00                          dc.b    (substr("move.l d0,(a0)", i, 1) - $20)
 (1)  128/    1BC1 : =$7                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 132 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 132 - 7/13/2025 17:31:55
 
 
 (1)  128/    1BC1 : 44                          dc.b    (substr("move.l d0,(a0)", i, 1) - $20)
@@ -8314,7 +8314,7 @@
 (1)  130/    1BD7 : =$2                 i       set i + 1
 (1)  130/    1BD7 : 56                          dc.b    (substr("move.l d0,$xxxx", i, 1) - $20)
 (1)  130/    1BD8 : =$3                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 133 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 133 - 7/13/2025 17:31:55
 
 
 (1)  130/    1BD8 : 45                          dc.b    (substr("move.l d0,$xxxx", i, 1) - $20)
@@ -8377,7 +8377,7 @@
 (1)  131/    1BF1 :                     
 (1)  132/    1BF1 : (MACRO)[3063]       	String122:	dfntxt "move.l $xxxx,$xxxx"
 (1)  132/    1BF1 : =$0                 i       set     0
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 134 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 134 - 7/13/2025 17:31:55
 
 
 (1)  132/    1BF1 :                             while i < strlen("move.l $xxxx,$xxxx")
@@ -8440,7 +8440,7 @@
 (1)  133/    1C08 : 00                          dc.b    (substr("-> 28 cycles!!", i, 1) - $20)
 (1)  133/    1C09 : =$6                 i       set i + 1
 (1)  133/    1C09 : 43                          dc.b    (substr("-> 28 cycles!!", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 135 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 135 - 7/13/2025 17:31:55
 
 
 (1)  133/    1C0A : =$7                 i       set i + 1
@@ -8503,7 +8503,7 @@
 (1)  134/    1C23 : =$12                i       set i + 1
 (1)  134/    1C23 : 43                          dc.b    (substr("and for the worst case scenario...", i, 1) - $20)
 (1)  134/    1C24 : =$13                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 136 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 136 - 7/13/2025 17:31:55
 
 
 (1)  134/    1C24 : 41                          dc.b    (substr("and for the worst case scenario...", i, 1) - $20)
@@ -8566,7 +8566,7 @@
 (1)  135/    1C3D : 58                          dc.b    (substr("divs.w $xxxx,d0", i, 1) - $20)
 (1)  135/    1C3E : =$B                 i       set i + 1
 (1)  135/    1C3E : 58                          dc.b    (substr("divs.w $xxxx,d0", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 137 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 137 - 7/13/2025 17:31:55
 
 
 (1)  135/    1C3F : =$C                 i       set i + 1
@@ -8629,7 +8629,7 @@
 (1)  138/    1C54 : =$2                 i       set i + 1
 (1)  138/    1C54 : 44                          dc.b    (substr("And now,", i, 1) - $20)
 (1)  138/    1C55 : =$3                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 138 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 138 - 7/13/2025 17:31:55
 
 
 (1)  138/    1C55 : 00                          dc.b    (substr("And now,", i, 1) - $20)
@@ -8692,7 +8692,7 @@
 (1)  139/    1C6E : 43                          dc.b    (substr("let's do some practice!", i, 1) - $20)
 (1)  139/    1C6F : =$15                i       set i + 1
 (1)  139/    1C6F : 45                          dc.b    (substr("let's do some practice!", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 139 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 139 - 7/13/2025 17:31:55
 
 
 (1)  139/    1C70 : =$16                i       set i + 1
@@ -8755,7 +8755,7 @@
 (1)  143/    1C84 : 54                          dc.b    (substr("Unfortunately, the Sega Mega Drive", i, 1) - $20)
 (1)  143/    1C85 : =$A                 i       set i + 1
 (1)  143/    1C85 : 45                          dc.b    (substr("Unfortunately, the Sega Mega Drive", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 140 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 140 - 7/13/2025 17:31:55
 
 
 (1)  143/    1C86 : =$B                 i       set i + 1
@@ -8818,7 +8818,7 @@
 (1)  144/    1C9F : =$2                 i       set i + 1
 (1)  144/    1C9F : 53                          dc.b    (substr("has crashed! I'm sorry :(", i, 1) - $20)
 (1)  144/    1CA0 : =$3                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 141 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 141 - 7/13/2025 17:31:55
 
 
 (1)  144/    1CA0 : 00                          dc.b    (substr("has crashed! I'm sorry :(", i, 1) - $20)
@@ -8881,7 +8881,7 @@
 (1)  145/    1CB9 : 59                          dc.b    (substr("If you want to know more,", i, 1) - $20)
 (1)  145/    1CBA : =$4                 i       set i + 1
 (1)  145/    1CBA : 4F                          dc.b    (substr("If you want to know more,", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 142 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 142 - 7/13/2025 17:31:55
 
 
 (1)  145/    1CBB : =$5                 i       set i + 1
@@ -8944,7 +8944,7 @@
 (1)  146/    1CD4 : =$5                 i       set i + 1
 (1)  146/    1CD4 : 07                          dc.b    (substr("there's some useful information:", i, 1) - $20)
 (1)  146/    1CD5 : =$6                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 143 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 143 - 7/13/2025 17:31:55
 
 
 (1)  146/    1CD5 : 53                          dc.b    (substr("there's some useful information:", i, 1) - $20)
@@ -9007,7 +9007,7 @@
 (1)  147/    1CEF :                     i       set i + 1
 (1)  147/    1CEF :                             endm
 (1)  147/    1CEF : 33                          dc.b    (substr("STOP_CODE: 0x", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 144 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 144 - 7/13/2025 17:31:55
 
 
 (1)  147/    1CF0 : =$1                 i       set i + 1
@@ -9070,7 +9070,7 @@
 (1)  150/    1D07 : =$0                 i       set     0
 (1)  150/    1D07 :                             while i < strlen("(ADDRESS_ERROR)")
 (1)  150/    1D07 :                             dc.b    (substr("(ADDRESS_ERROR)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 145 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 145 - 7/13/2025 17:31:55
 
 
 (1)  150/    1D07 :                     i       set i + 1
@@ -9133,7 +9133,7 @@
 (1)  151/    1D1F : 2E                          dc.b    (substr("(ILLEGALINSTRUCTION_EXCEPTION)", i, 1) - $20)
 (1)  151/    1D20 : =$A                 i       set i + 1
 (1)  151/    1D20 : 33                          dc.b    (substr("(ILLEGALINSTRUCTION_EXCEPTION)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 146 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 146 - 7/13/2025 17:31:55
 
 
 (1)  151/    1D21 : =$B                 i       set i + 1
@@ -9196,7 +9196,7 @@
 (1)  152/    1D3A : =$6                 i       set i + 1
 (1)  152/    1D3A : 29                          dc.b    (substr("(DIVISIONBYZERO_EXCEPTION)", i, 1) - $20)
 (1)  152/    1D3B : =$7                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 147 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 147 - 7/13/2025 17:31:55
 
 
 (1)  152/    1D3B : 2F                          dc.b    (substr("(DIVISIONBYZERO_EXCEPTION)", i, 1) - $20)
@@ -9259,7 +9259,7 @@
 (1)  153/    1D54 : 3F                          dc.b    (substr("(CHECK_EXCEPTION)", i, 1) - $20)
 (1)  153/    1D55 : =$7                 i       set i + 1
 (1)  153/    1D55 : 25                          dc.b    (substr("(CHECK_EXCEPTION)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 148 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 148 - 7/13/2025 17:31:55
 
 
 (1)  153/    1D56 : =$8                 i       set i + 1
@@ -9322,7 +9322,7 @@
 (1)  154/    1D6F : =$10                i       set i + 1
 (1)  154/    1D6F : 09                          dc.b    (substr("(TRAPV_EXCEPTION)", i, 1) - $20)
 (1)  154/    1D70 : =$11                i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 149 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 149 - 7/13/2025 17:31:55
 
 
 (1)  154/    1D70 :                     
@@ -9385,7 +9385,7 @@
 (1)  156/    1D86 : =$1                 i       set i + 1
 (1)  156/    1D86 : 34                          dc.b    (substr("(TRACE_EXCEPTION)", i, 1) - $20)
 (1)  156/    1D87 : =$2                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 150 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 150 - 7/13/2025 17:31:55
 
 
 (1)  156/    1D87 : 32                          dc.b    (substr("(TRACE_EXCEPTION)", i, 1) - $20)
@@ -9448,7 +9448,7 @@
 (1)  157/    1DA0 : 25                          dc.b    (substr("(LINE1010_EMU)", i, 1) - $20)
 (1)  157/    1DA1 : =$B                 i       set i + 1
 (1)  157/    1DA1 : 2D                          dc.b    (substr("(LINE1010_EMU)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 151 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 151 - 7/13/2025 17:31:55
 
 
 (1)  157/    1DA2 : =$C                 i       set i + 1
@@ -9511,7 +9511,7 @@
 (1)  159/    1DB7 : 29                          dc.b    (substr("(SPURIOUS_EXCEPTION)", i, 1) - $20)
 (1)  159/    1DB8 : =$6                 i       set i + 1
 (1)  159/    1DB8 : 2F                          dc.b    (substr("(SPURIOUS_EXCEPTION)", i, 1) - $20)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 152 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 152 - 7/13/2025 17:31:55
 
 
 (1)  159/    1DB9 : =$7                 i       set i + 1
@@ -9574,7 +9574,7 @@
 (1)  160/    1DD2 : =$C                 i       set i + 1
 (1)  160/    1DD2 : 30                          dc.b    (substr("(TRAPxx_EXCEPTION)", i, 1) - $20)
 (1)  160/    1DD3 : =$D                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 153 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 153 - 7/13/2025 17:31:55
 
 
 (1)  160/    1DD3 : 34                          dc.b    (substr("(TRAPxx_EXCEPTION)", i, 1) - $20)
@@ -9637,7 +9637,7 @@
 (1)  162/    1DE9 : =$2                 i       set i + 1
 (1)  162/    1DE9 : 21                          dc.b    (substr("(MANUALLY_INITIATED_CRASH)", i, 1) - $20)
 (1)  162/    1DEA : =$3                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 154 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 154 - 7/13/2025 17:31:55
 
 
 (1)  162/    1DEA : 2E                          dc.b    (substr("(MANUALLY_INITIATED_CRASH)", i, 1) - $20)
@@ -9700,7 +9700,7 @@
 (1)  166/    1E02 : =$1                 i       set i + 1
 (1)  166/    1E02 : 45                          dc.b    (substr("Registers dump:", i, 1) - $20)
 (1)  166/    1E03 : =$2                 i       set i + 1
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 155 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/Strings.asm) - Page 155 - 7/13/2025 17:31:55
 
 
 (1)  166/    1E03 : 47                          dc.b    (substr("Registers dump:", i, 1) - $20)
@@ -9763,7 +9763,7 @@
 (1)   21/    1E24 : 115D                	dc.w	String3
 (1)   22/    1E26 : (MACRO)[3665]       	VRAMCoordinates	0,5
 (1)   22/    1E26 : =$E280              address set (PLANEA_ADDR)|(5*($40*2)+0*2)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 156 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 156 - 7/13/2025 17:31:55
 
 
 (1)   22/    1E26 : 6280 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
@@ -9826,7 +9826,7 @@
 (1)   58/    1E6A : =$E380              address set (PLANEA_ADDR)|(7*($40*2)+0*2)
 (1)   58/    1E6A : 6380 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
 (1)   59/    1E6E :                     ;-------------------------
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 157 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 157 - 7/13/2025 17:31:55
 
 
 (1)   60/    1E6E : 12C2                	dc.w	String15
@@ -9889,7 +9889,7 @@
 (1)   95/    1EB2 :                     ;-------------------------
 (1)   96/    1EB2 : 13E6                	dc.w	String26
 (1)   97/    1EB4 : (MACRO)[3688]       	VRAMCoordinates	0,8
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 158 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 158 - 7/13/2025 17:31:55
 
 
 (1)   97/    1EB4 : =$E400              address set (PLANEA_ADDR)|(8*($40*2)+0*2)
@@ -9952,7 +9952,7 @@
 (1)  131/    1EFA :                     ;-------------------------
 (1)  132/    1EFA : 1500                	dc.w	String38
 (1)  133/    1EFC : (MACRO)[3700]       	VRAMCoordinates	0,20
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 159 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 159 - 7/13/2025 17:31:55
 
 
 (1)  133/    1EFC : =$EA00              address set (PLANEA_ADDR)|(20*($40*2)+0*2)
@@ -10015,7 +10015,7 @@
 (1)  169/    1F40 : (MACRO)[3711]       	VRAMCoordinates	11,14
 (1)  169/    1F40 : =$E716              address set (PLANEA_ADDR)|(14*($40*2)+11*2)
 (1)  169/    1F40 : 6716 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 160 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 160 - 7/13/2025 17:31:55
 
 
 (1)  170/    1F44 :                     ;-------------------------
@@ -10078,7 +10078,7 @@
 (1)  205/    1F84 : 63A2 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
 (1)  206/    1F88 :                     ;-------------------------
 (1)  207/    1F88 : 16BA                	dc.w	String61
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 161 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 161 - 7/13/2025 17:31:55
 
 
 (1)  208/    1F8A : (MACRO)[3723]       	VRAMCoordinates	5,8
@@ -10141,7 +10141,7 @@
 (1)  243/    1FCC : 17C3                	dc.w	String72
 (1)  244/    1FCE : (MACRO)[3734]       	VRAMCoordinates 6,0
 (1)  244/    1FCE : =$E00C              address set (PLANEA_ADDR)|(0*($40*2)+6*2)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 162 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 162 - 7/13/2025 17:31:55
 
 
 (1)  244/    1FCE : 600C 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
@@ -10204,7 +10204,7 @@
 (1)  279/    2014 : 1890                	dc.w	String84
 (1)  280/    2016 : (MACRO)[3746]       	VRAMCoordinates	0,20
 (1)  280/    2016 : =$EA00              address set (PLANEA_ADDR)|(20*($40*2)+0*2)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 163 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 163 - 7/13/2025 17:31:55
 
 
 (1)  280/    2016 : 6A00 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
@@ -10267,7 +10267,7 @@
 (1)  315/    205C : 195C                	dc.w	String96
 (1)  316/    205E : (MACRO)[3758]       	VRAMCoordinates	0,24
 (1)  316/    205E : =$EC00              address set (PLANEA_ADDR)|(24*($40*2)+0*2)
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 164 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 164 - 7/13/2025 17:31:55
 
 
 (1)  316/    205E : 6C00 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
@@ -10330,7 +10330,7 @@
 (1)  352/    20A2 : =$E600              address set (PLANEA_ADDR)|(12*($40*2)+0*2)
 (1)  352/    20A2 : 6600 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
 (1)  353/    20A6 :                     ;-------------------------
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 165 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 165 - 7/13/2025 17:31:55
 
 
 (1)  354/    20A6 : 1AA9                	dc.w	String108
@@ -10393,7 +10393,7 @@
 (1)  388/    20EA : =$ECA8              address set (PLANEA_ADDR)|(25*($40*2)+20*2)
 (1)  388/    20EA : 6CA8 0003                   dc.l    ((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
 (1)  389/    20EE :                     ;-------------------------
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 166 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 166 - 7/13/2025 17:31:55
 
 
 (1)  390/    20EE : 1BD5                	dc.w	String120
@@ -10456,7 +10456,7 @@
 (1)  427/    212E :                     ; Crash handler strings
 (1)  428/    212E :                     ; ------------------------
 (1)  429/    212E :                     
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 167 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm(assets/String Properties.asm) - Page 167 - 7/13/2025 17:31:55
 
 
 (1)  430/    212E :                     Messages:
@@ -10519,243 +10519,247 @@
      446/    2172 : 41F9 00C0 0004      	lea	VDP_CTRL,a0
      447/    2178 : 43F9 00C0 0000      	lea	VDP_DATA,a1
      448/    217E : 45F9 00A1 0009      	lea JOY_CTRL,a2
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 168 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 168 - 7/13/2025 17:31:55
 
 
      449/    2184 : 47F9 00A1 0003      	lea	JOY_DATA,a3
      450/    218A : 49F8 1E10           	lea STR_Properties,a4
-     451/    218E :                     
-     452/    218E :                     VDP_Setup
-     453/    218E : 4A50                	tst.w 	(a0) ; Testing the VDP control port safely resets it
-     454/    2190 :                     	
-     455/    2190 : 30BC 8004           	move.w  #VDPREG_MODE1|%00000100,(a0)	; Mode register #1
-     456/    2194 : 30BC 817C               move.w  #VDPREG_MODE2|%01111100,(a0)	; Mode register #2
-     457/    2198 : 30BC 8B00               move.w  #VDPREG_MODE3|%00000000,(a0)	; Mode register #3
-     458/    219C : 30BC 8C81               move.w  #VDPREG_MODE4|%10000001,(a0)	; Mode register #4
-     459/    21A0 :                         
-     460/    21A0 : 30BC 8238               move.w  #VDPREG_PLANEA|(PLANEA_ADDR>>10),(a0)   ; Plane A address
-     461/    21A4 : 30BC 8407               move.w  #VDPREG_PLANEB|(PLANEB_ADDR>>13),(a0)   ; Plane B address
-     462/    21A8 : 30BC 857F           	move.w  #VDPREG_SPRITE|(SPRITE_ADDR>>9),(a0)	; Sprite address
-     463/    21AC : 30BC 833F               move.w  #VDPREG_WINDOW|(WINDOW_ADDR>>10),(a0)	; Window address
-     464/    21B0 : 30BC 8D3F               move.w  #VDPREG_HSCROLL|(HSCROLL_ADDR>>10),(a0)	; HScroll address
-     465/    21B4 :                         
-     466/    21B4 : 30BC 9001               move.w  #VDPREG_SIZE|%00000001,(a0)	; Tilemap size
-     467/    21B8 : 30BC 9100           	move.w  #VDPREG_WINX|$00,(a0)		; Window X split
-     468/    21BC : 30BC 9200               move.w  #VDPREG_WINY|$00,(a0)		; Window Y split
-     469/    21C0 : 30BC 8F02               move.w  #VDPREG_INCR|$02,(a0)		; Autoincrement
-     470/    21C4 : 30BC 8700               move.w  #VDPREG_BGCOL|$00,(a0)		; Background color
-     471/    21C8 : 30BC 8AFF           	move.w  #VDPREG_HRATE|$FF,(a0)		; HBlank IRQ rate
-     472/    21CC :                     	
-     473/    21CC :                     JOY_Setup
-     474/    21CC : 1487                	move.b 	d7,(a2)
-     475/    21CE : 1687                	move.b 	d7,(a3)
-     476/    21D0 :                     
-     477/    21D0 :                     ;=================================================================================
-     478/    21D0 :                     
-     479/    21D0 :                     DMA_Load_BodyFont
-     480/    21D0 : (MACRO)[3797]       	dma68kToVDP PAT_BodyFont, $0000, PAT_BodyFont_SIZE_B, VRAM, FALSE, (a0), (a1)
-     480/    21D0 : =$0                                 set     .c,0
-     480/    21D0 : 20BC 9406 9300              move.l  #dmaCommandLength(dmaLength(PAT_BodyFont_SIZE_B)),(a0)
-     480/    21D6 : 20BC 9602 957A              move.l  #dmaCommandSrcLow(dmaSource(PAT_BodyFont)),(a0)
-     480/    21DC : 20BC 9700 4000              move.l  #(dmaCommandSrcHigh(dmaSource(PAT_BodyFont))<<16)|((dmaCommand(($0000)|.c,VRAM)>>16)&$FFFF),(a0)
-     480/    21E2 : 30BC 0080                   move.w  #(dmaCommand(($0000)|.c,VRAM)&$FFFF),(a0)
-     481/    21E6 :                     
-     482/    21E6 :                     CRAM_Load_BodyFontPalette
-     483/    21E6 : (MACRO)[3798]       	vdpSetColorSpace 0,(a0)
-     483/    21E6 : 20BC C000 0000              move.l  #(((0*2)&$3FFF)<<16)|(((0*2)&$C000)>>14)|(CRAM),(a0)
-     484/    21EC : 22BC 0000 EEEE      	move.l	#$0000EEEE,(a1)	; black and white
-     485/    21F2 :                     
-     486/    21F2 : (MACRO)[3799]       	dmaFillVRAM $00, PLANEA_ADDR, $757, (a0), (a1) ; clears characters at every soft reset
-     486/    21F2 :                             
-     486/    21F2 : 20BC 940E 93AA              move.l  #dmaCommandLength(2*($757-2)),(a0)
-     486/    21F8 : 20BC 8F01 9780              move.l  #(VDPREG_INCR|1)<<16|(VDPREG_DMASRC_H|$80),(a0) ; VRAM pointer increment: $0001, VRAM fill
-     486/    21FE :                             ; Forcing the low bit of PLANEA_ADDR to be 1, as described before.
-     486/    21FE : 20BC 6001 0083              move.l  #dmaCommand((PLANEA_ADDR)|1,VRAM),(a0)
-     486/    2204 : 32BC 0000                   move.w  #(($00)<<8)|($00),(a1)
-     486/    2208 :                     .wait:
-     486/    2208 : 3410                        move.w  (a0),d2
-     486/    220A : 0802 0001                   btst    #1,d2
-     486/    220E : 66F8                        bne.s   .wait   ; busy loop until the VDP is finished filling
-     486/    2210 : 30BC 8F02                   move.w  #(VDPREG_INCR)|2,(a0) ; VRAM pointer increment back to 2
-     487/    2214 :                     
-     488/    2214 : 6000 004E           	bra.w 	UpdateStringProperties
-     489/    2218 :                     	;bra.s	PressWait	it already does this in UpdateStringProperties
-     490/    2218 :                     
-     491/    2218 :                     ;=================================================================================
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 169 - 7/13/2025 17:28:33
+Sonic.asm:451:2: unknown instruction 'DCB'
+ dcb
+ ~~~
+     451/    218E :                     	dcb
+     452/    218E :                     
+     453/    218E :                     VDP_Setup
+     454/    218E : 4A50                	tst.w 	(a0) ; Testing the VDP control port safely resets it
+     455/    2190 :                     	
+     456/    2190 : 30BC 8004           	move.w  #VDPREG_MODE1|%00000100,(a0)	; Mode register #1
+     457/    2194 : 30BC 817C               move.w  #VDPREG_MODE2|%01111100,(a0)	; Mode register #2
+     458/    2198 : 30BC 8B00               move.w  #VDPREG_MODE3|%00000000,(a0)	; Mode register #3
+     459/    219C : 30BC 8C81               move.w  #VDPREG_MODE4|%10000001,(a0)	; Mode register #4
+     460/    21A0 :                         
+     461/    21A0 : 30BC 8238               move.w  #VDPREG_PLANEA|(PLANEA_ADDR>>10),(a0)   ; Plane A address
+     462/    21A4 : 30BC 8407               move.w  #VDPREG_PLANEB|(PLANEB_ADDR>>13),(a0)   ; Plane B address
+     463/    21A8 : 30BC 857F           	move.w  #VDPREG_SPRITE|(SPRITE_ADDR>>9),(a0)	; Sprite address
+     464/    21AC : 30BC 833F               move.w  #VDPREG_WINDOW|(WINDOW_ADDR>>10),(a0)	; Window address
+     465/    21B0 : 30BC 8D3F               move.w  #VDPREG_HSCROLL|(HSCROLL_ADDR>>10),(a0)	; HScroll address
+     466/    21B4 :                         
+     467/    21B4 : 30BC 9001               move.w  #VDPREG_SIZE|%00000001,(a0)	; Tilemap size
+     468/    21B8 : 30BC 9100           	move.w  #VDPREG_WINX|$00,(a0)		; Window X split
+     469/    21BC : 30BC 9200               move.w  #VDPREG_WINY|$00,(a0)		; Window Y split
+     470/    21C0 : 30BC 8F02               move.w  #VDPREG_INCR|$02,(a0)		; Autoincrement
+     471/    21C4 : 30BC 8700               move.w  #VDPREG_BGCOL|$00,(a0)		; Background color
+     472/    21C8 : 30BC 8AFF           	move.w  #VDPREG_HRATE|$FF,(a0)		; HBlank IRQ rate
+     473/    21CC :                     	
+     474/    21CC :                     JOY_Setup
+     475/    21CC : 1487                	move.b 	d7,(a2)
+     476/    21CE : 1687                	move.b 	d7,(a3)
+     477/    21D0 :                     
+     478/    21D0 :                     ;=================================================================================
+     479/    21D0 :                     
+     480/    21D0 :                     DMA_Load_BodyFont
+     481/    21D0 : (MACRO)[3797]       	dma68kToVDP PAT_BodyFont, $0000, PAT_BodyFont_SIZE_B, VRAM, FALSE, (a0), (a1)
+     481/    21D0 : =$0                                 set     .c,0
+     481/    21D0 : 20BC 9406 9300              move.l  #dmaCommandLength(dmaLength(PAT_BodyFont_SIZE_B)),(a0)
+     481/    21D6 : 20BC 9602 957A              move.l  #dmaCommandSrcLow(dmaSource(PAT_BodyFont)),(a0)
+     481/    21DC : 20BC 9700 4000              move.l  #(dmaCommandSrcHigh(dmaSource(PAT_BodyFont))<<16)|((dmaCommand(($0000)|.c,VRAM)>>16)&$FFFF),(a0)
+     481/    21E2 : 30BC 0080                   move.w  #(dmaCommand(($0000)|.c,VRAM)&$FFFF),(a0)
+     482/    21E6 :                     
+     483/    21E6 :                     CRAM_Load_BodyFontPalette
+     484/    21E6 : (MACRO)[3798]       	vdpSetColorSpace 0,(a0)
+     484/    21E6 : 20BC C000 0000              move.l  #(((0*2)&$3FFF)<<16)|(((0*2)&$C000)>>14)|(CRAM),(a0)
+     485/    21EC : 22BC 0000 EEEE      	move.l	#$0000EEEE,(a1)	; black and white
+     486/    21F2 :                     
+     487/    21F2 : (MACRO)[3799]       	dmaFillVRAM $00, PLANEA_ADDR, $757, (a0), (a1) ; clears characters at every soft reset
+     487/    21F2 :                             
+     487/    21F2 : 20BC 940E 93AA              move.l  #dmaCommandLength(2*($757-2)),(a0)
+     487/    21F8 : 20BC 8F01 9780              move.l  #(VDPREG_INCR|1)<<16|(VDPREG_DMASRC_H|$80),(a0) ; VRAM pointer increment: $0001, VRAM fill
+     487/    21FE :                             ; Forcing the low bit of PLANEA_ADDR to be 1, as described before.
+     487/    21FE : 20BC 6001 0083              move.l  #dmaCommand((PLANEA_ADDR)|1,VRAM),(a0)
+     487/    2204 : 32BC 0000                   move.w  #(($00)<<8)|($00),(a1)
+     487/    2208 :                     .wait:
+     487/    2208 : 3410                        move.w  (a0),d2
+     487/    220A : 0802 0001                   btst    #1,d2
+     487/    220E : 66F8                        bne.s   .wait   ; busy loop until the VDP is finished filling
+     487/    2210 : 30BC 8F02                   move.w  #(VDPREG_INCR)|2,(a0) ; VRAM pointer increment back to 2
+     488/    2214 :                     
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 169 - 7/13/2025 17:31:55
 
 
-     492/    2218 :                     
-     493/    2218 :                     ; ---------------------------------------------------------------------------
-     494/    2218 :                     ; Subroutine to	read the controller and wait until the input is released
-     495/    2218 :                     ; ---------------------------------------------------------------------------
-     496/    2218 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
-     497/    2218 :                     
-     498/    2218 :                     ;GetJoypad:
-     499/    2218 :                     ;	move.b 	d7,(a3)	; write $40 to request controller state
-     500/    2218 :                     ;	nop	; wait for the bus to get the controller state
-     501/    2218 :                     ;	nop
+     489/    2214 : 6000 FFFE           	bra.w 	UpdateStringProperties
+     490/    2218 :                     	;bra.s	PressWait	it already does this in UpdateStringProperties
+     491/    2218 :                     
+     492/    2218 :                     ;=================================================================================
+     493/    2218 :                     
+     494/    2218 :                     ; ---------------------------------------------------------------------------
+     495/    2218 :                     ; Subroutine to	read the controller and wait until the input is released
+     496/    2218 :                     ; ---------------------------------------------------------------------------
+     497/    2218 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
+     498/    2218 :                     
+     499/    2218 :                     ;GetJoypad:
+     500/    2218 :                     ;	move.b 	d7,(a3)	; write $40 to request controller state
+     501/    2218 :                     ;	nop	; wait for the bus to get the controller state
      502/    2218 :                     ;	nop
      503/    2218 :                     ;	nop
-     504/    2218 :                     ;	move.b	(a3),d6	; put control state somewhere
-     505/    2218 :                     ;	rts
-     506/    2218 :                     
-     507/    2218 :                     ; This portion of code was meant to change slide only by pressing the button once (not by holding, effectively avoiding debouncing).
-     508/    2218 :                     ; This is unnecessary, because the animation is slow enough to prevent accidental slide changes
-     509/    2218 :                     ;PressWait: 
-     510/    2218 :                     ;.press_wait:
-     511/    2218 :                     ;	stop	#$2500	; wait until next frame (can't make a frame-perfect press)
-     512/    2218 :                     ;	bsr.s	GetJoypad
-     513/    2218 :                     ;	cmp.b	d5,d6	; are there any pressed buttons? (d5 = %0111 1111)
-     514/    2218 :                     ;	bne.s	.press_wait
-     515/    2218 :                     ; End of function GetJoypad
-     516/    2218 :                     
-     517/    2218 :                     ; ---------------------------------------------------------------------------
-     518/    2218 :                     ; Subroutine to	perform the action according to the pressed button
-     519/    2218 :                     ; ---------------------------------------------------------------------------
-     520/    2218 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
-     521/    2218 :                     
-     522/    2218 :                     ; Why is GetJoypad at the bottom of this routine?
-     523/    2218 :                     ; Because PressWait has already updated the controller state at this point.
-     524/    2218 :                     ReadJoypad:
-     525/    2218 :                     	;bsr.s	GetJoypad
-     526/    2218 : 1687                	move.b 	d7,(a3)	; write $40 to request controller state
-     527/    221A : 4E71                	nop	; wait for the bus to get the controller state
-     528/    221C : 4E71                	nop
-     529/    221E : 4E71                	nop
-     530/    2220 : 4E71                	nop
-     531/    2222 : 1C13                	move.b	(a3),d6	; put control state somewhere
-     532/    2224 : 0806 0003           	btst 	#JOY_R,d6
-     533/    2228 : 6734                	beq.s 	NextString
-     534/    222A : 0806 0002           	btst	#JOY_L,d6
-     535/    222E : 6726                	beq.s	RedrawSlide
-     536/    2230 : 0806 0000           	btst	#JOY_U,d6
-     537/    2234 : 6700 0060           	beq.w	NextSlide
-     538/    2238 : 0806 0001           	btst 	#JOY_D,d6
-     539/    223C : 6700 0068           	beq.w 	PreviousSlide
-     540/    2240 : 0806 0005           	btst 	#JOY_C,d6
-     541/    2244 : 6700 0074           	beq.w	ClearScreen_Alt
-     542/    2248 : 0806 0004           	btst 	#JOY_B,d6
-     543/    224C : 6700 0096           	beq.w 	CPU_CrashSystem
-     544/    2250 :                     WaitNextFrame:
-     545/    2250 : 4E72 2500           	stop	#$2500		; wait until next frame
-     546/    2254 : 60C2                	bra.s 	ReadJoypad
-     547/    2256 :                     
-     548/    2256 :                     RedrawSlide:
-     549/    2256 :                     .find_terminator:
-     550/    2256 : 4A64                	tst.w	-(a4)		; find the previous terminator
-     551/    2258 : 6AFC                	bpl.s	.find_terminator
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 170 - 7/13/2025 17:28:33
+     504/    2218 :                     ;	nop
+     505/    2218 :                     ;	move.b	(a3),d6	; put control state somewhere
+     506/    2218 :                     ;	rts
+     507/    2218 :                     
+     508/    2218 :                     ; This portion of code was meant to change slide only by pressing the button once (not by holding, effectively avoiding debouncing).
+     509/    2218 :                     ; This is unnecessary, because the animation is slow enough to prevent accidental slide changes
+     510/    2218 :                     ;PressWait: 
+     511/    2218 :                     ;.press_wait:
+     512/    2218 :                     ;	stop	#$2500	; wait until next frame (can't make a frame-perfect press)
+     513/    2218 :                     ;	bsr.s	GetJoypad
+     514/    2218 :                     ;	cmp.b	d5,d6	; are there any pressed buttons? (d5 = %0111 1111)
+     515/    2218 :                     ;	bne.s	.press_wait
+     516/    2218 :                     ; End of function GetJoypad
+     517/    2218 :                     
+     518/    2218 :                     ; ---------------------------------------------------------------------------
+     519/    2218 :                     ; Subroutine to	perform the action according to the pressed button
+     520/    2218 :                     ; ---------------------------------------------------------------------------
+     521/    2218 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
+     522/    2218 :                     
+     523/    2218 :                     ; Why is GetJoypad at the bottom of this routine?
+     524/    2218 :                     ; Because PressWait has already updated the controller state at this point.
+     525/    2218 :                     ReadJoypad:
+     526/    2218 :                     	;bsr.s	GetJoypad
+     527/    2218 : 1687                	move.b 	d7,(a3)	; write $40 to request controller state
+     528/    221A : 4E71                	nop	; wait for the bus to get the controller state
+     529/    221C : 4E71                	nop
+     530/    221E : 4E71                	nop
+     531/    2220 : 4E71                	nop
+     532/    2222 : 1C13                	move.b	(a3),d6	; put control state somewhere
+     533/    2224 : 0806 0003           	btst 	#JOY_R,d6
+     534/    2228 : 67FE                	beq.s 	NextString
+     535/    222A : 0806 0002           	btst	#JOY_L,d6
+     536/    222E : 67FE                	beq.s	RedrawSlide
+     537/    2230 : 0806 0000           	btst	#JOY_U,d6
+     538/    2234 : 6700 FFFE           	beq.w	NextSlide
+     539/    2238 : 0806 0001           	btst 	#JOY_D,d6
+     540/    223C : 6700 FFFE           	beq.w 	PreviousSlide
+     541/    2240 : 0806 0005           	btst 	#JOY_C,d6
+     542/    2244 : 6700 FFFE           	beq.w	ClearScreen_Alt
+     543/    2248 : 0806 0004           	btst 	#JOY_B,d6
+     544/    224C : 6700 FFFE           	beq.w 	CPU_CrashSystem
+     545/    2250 :                     WaitNextFrame:
+     546/    2250 : 4E72 2500           	stop	#$2500		; wait until next frame
+     547/    2254 : 60C2                	bra.s 	ReadJoypad
+     548/    2256 :                     
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 170 - 7/13/2025 17:31:55
 
 
-     552/    225A : 6164                	bsr.s 	VDP_ClearScreen
-     553/    225C : 6006                	bra.s	UpdateStringProperties
-     554/    225E :                     
-     555/    225E :                     NextString:
-     556/    225E : B8FC 212C           	cmpa.w	#Slide8+6,a4	; is the boundary limit to avoid going outside the slides being hit?
-     557/    2262 : 64EC                	bhs.s	WaitNextFrame	; if yes, do nothing
-     558/    2264 :                     	;addq.w	#6,a4			; already done by UpdateStringProperties
-     559/    2264 :                     	
-     560/    2264 :                     ; ---------------------------------------------------------------------------
-     561/    2264 :                     ; Subroutine to	draw text on screen (a4: string pointer)
-     562/    2264 :                     ; ---------------------------------------------------------------------------
-     563/    2264 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
-     564/    2264 :                     
-     565/    2264 :                     UpdateStringProperties:
-     566/    2264 : 321C                	move.w	(a4)+,d1	; get string address and move pointer
-     567/    2266 : 4A41                	tst.w	d1			; are we encountering an $FFFF terminator?
-     568/    2268 : 6A04                	bpl.s	.continue	; if no, continue
-     569/    226A : 321C                	move.w	(a4)+,d1	; update d1 and skip terminator
-     570/    226C : 6152                	bsr.s 	VDP_ClearScreen
-     571/    226E :                     .continue:
-     572/    226E : 3A41                	movea.w	d1,a5		; update the array of strings pointer	
-     573/    2270 : 302C 0004           	move.w 	4(a4),d0	; get the next string address into d0 6(a4)
-     574/    2274 : 4A40                	tst.w	d0			; did d0 pick up an $FFFF terminator?
-     575/    2276 : 6B18                	bmi.s	SkipTerminator	; if yes, update strings skipping terminator
-     576/    2278 :                     Continue:
-     577/    2278 : 9041                	sub.w	d1,d0		; get the length by doing the difference
-     578/    227A : 5340                	subq.w	#1,d0		; dbf ends up with $FFFF
-     579/    227C :                     	; gets string screen position address and sets the plane A accordingly
-     580/    227C : 209C                    move.l	(a4)+,(a0)	; 2(a4) to avoid more spent cycles in adding 2 to a4
-     581/    227E :                     	
-     582/    227E :                     UpdateDisplay:
-     583/    227E : 2203                	move.l	d3,d1
-     584/    2280 :                     .print_text: ; (30 cycles per loop)
-     585/    2280 : 121D                	move.b 	(a5)+,d1
-     586/    2282 : 3281                	move.w 	d1,(a1)		; no flip, palette 0, no priority
-     587/    2284 : 4E72 2500           	stop	#$2500		; wait for 1 frame (to make the animation)
-     588/    2288 : 51C8 FFF6           	dbf	d0,.print_text
-     589/    228C : 6000 FF8A           	bra.w	ReadJoypad
-     590/    2290 :                     
-     591/    2290 :                     SkipTerminator:
-     592/    2290 : 302C 0006           	move.w	6(a4),d0		; update d0, skipping the terminator
-     593/    2294 : 60E2                	bra.s	Continue
-     594/    2296 :                     	
-     595/    2296 :                     ; Skips directly to first or last relevant slide using the $FFFF terminators
-     596/    2296 :                     NextSlide:
-     597/    2296 : B8FC 212C           	cmpa.w	#Slide8+6,a4	; is the boundary limit to avoid going outside the slides being hit?
-     598/    229A : 6400 FFB4           	bhs.w	WaitNextFrame	; if yes, do nothing
-     599/    229E :                     .find_terminator:
-     600/    229E : 4A5C                	tst.w	(a4)+
-     601/    22A0 : 6AFC                	bpl.s	.find_terminator
-     602/    22A2 : 611C                	bsr.s 	VDP_ClearScreen
-     603/    22A4 : 60BE                	bra.s	UpdateStringProperties
-     604/    22A6 :                     	
-     605/    22A6 :                     PreviousSlide:
-     606/    22A6 : B8FC 1E18           	cmpa.w	#Slide0+8,a4	; is the boundary limit to avoid going outside the slides being hit?
-     607/    22AA : 6300 FFA4           	bls.w	WaitNextFrame	; if yes, do nothing
-     608/    22AE :                     .find_terminator:
-     609/    22AE : 4A64                	tst.w	-(a4)				; test until we find the terminator
-     610/    22B0 : 6AFC                	bpl.s	.find_terminator	; terminator is $FFFF so it's negative
-     611/    22B2 :                     .find_secondterminator:
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 171 - 7/13/2025 17:28:33
+     549/    2256 :                     RedrawSlide:
+     550/    2256 :                     .find_terminator:
+     551/    2256 : 4A64                	tst.w	-(a4)		; find the previous terminator
+     552/    2258 : 6AFC                	bpl.s	.find_terminator
+     553/    225A : 61FE                	bsr.s 	VDP_ClearScreen
+     554/    225C : 60FE                	bra.s	UpdateStringProperties
+     555/    225E :                     
+     556/    225E :                     NextString:
+     557/    225E : B8FC 212C           	cmpa.w	#Slide8+6,a4	; is the boundary limit to avoid going outside the slides being hit?
+     558/    2262 : 64EC                	bhs.s	WaitNextFrame	; if yes, do nothing
+     559/    2264 :                     	;addq.w	#6,a4			; already done by UpdateStringProperties
+     560/    2264 :                     	
+     561/    2264 :                     ; ---------------------------------------------------------------------------
+     562/    2264 :                     ; Subroutine to	draw text on screen (a4: string pointer)
+     563/    2264 :                     ; ---------------------------------------------------------------------------
+     564/    2264 :                     ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||
+     565/    2264 :                     
+     566/    2264 :                     UpdateStringProperties:
+     567/    2264 : 321C                	move.w	(a4)+,d1	; get string address and move pointer
+     568/    2266 : 4A41                	tst.w	d1			; are we encountering an $FFFF terminator?
+     569/    2268 : 6AFE                	bpl.s	.continue	; if no, continue
+     570/    226A : 321C                	move.w	(a4)+,d1	; update d1 and skip terminator
+     571/    226C : 61FE                	bsr.s 	VDP_ClearScreen
+     572/    226E :                     .continue:
+     573/    226E : 3A41                	movea.w	d1,a5		; update the array of strings pointer	
+     574/    2270 : 302C 0004           	move.w 	4(a4),d0	; get the next string address into d0 6(a4)
+     575/    2274 : 4A40                	tst.w	d0			; did d0 pick up an $FFFF terminator?
+     576/    2276 : 6BFE                	bmi.s	SkipTerminator	; if yes, update strings skipping terminator
+     577/    2278 :                     Continue:
+     578/    2278 : 9041                	sub.w	d1,d0		; get the length by doing the difference
+     579/    227A : 5340                	subq.w	#1,d0		; dbf ends up with $FFFF
+     580/    227C :                     	; gets string screen position address and sets the plane A accordingly
+     581/    227C : 209C                    move.l	(a4)+,(a0)	; 2(a4) to avoid more spent cycles in adding 2 to a4
+     582/    227E :                     	
+     583/    227E :                     UpdateDisplay:
+     584/    227E : 2203                	move.l	d3,d1
+     585/    2280 :                     .print_text: ; (30 cycles per loop)
+     586/    2280 : 121D                	move.b 	(a5)+,d1
+     587/    2282 : 3281                	move.w 	d1,(a1)		; no flip, palette 0, no priority
+     588/    2284 : 4E72 2500           	stop	#$2500		; wait for 1 frame (to make the animation)
+     589/    2288 : 51C8 FFF6           	dbf	d0,.print_text
+     590/    228C : 6000 FF8A           	bra.w	ReadJoypad
+     591/    2290 :                     
+     592/    2290 :                     SkipTerminator:
+     593/    2290 : 302C 0006           	move.w	6(a4),d0		; update d0, skipping the terminator
+     594/    2294 : 60E2                	bra.s	Continue
+     595/    2296 :                     	
+     596/    2296 :                     ; Skips directly to first or last relevant slide using the $FFFF terminators
+     597/    2296 :                     NextSlide:
+     598/    2296 : B8FC 212C           	cmpa.w	#Slide8+6,a4	; is the boundary limit to avoid going outside the slides being hit?
+     599/    229A : 6400 FFB4           	bhs.w	WaitNextFrame	; if yes, do nothing
+     600/    229E :                     .find_terminator:
+     601/    229E : 4A5C                	tst.w	(a4)+
+     602/    22A0 : 6AFC                	bpl.s	.find_terminator
+     603/    22A2 : 61FE                	bsr.s 	VDP_ClearScreen
+     604/    22A4 : 60BE                	bra.s	UpdateStringProperties
+     605/    22A6 :                     	
+     606/    22A6 :                     PreviousSlide:
+     607/    22A6 : B8FC 1E18           	cmpa.w	#Slide0+8,a4	; is the boundary limit to avoid going outside the slides being hit?
+     608/    22AA : 6300 FFA4           	bls.w	WaitNextFrame	; if yes, do nothing
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 171 - 7/13/2025 17:31:55
 
 
-     612/    22B2 : 4A64                	tst.w	-(a4)				; find the next terminator
-     613/    22B4 : 6AFC                	bpl.s	.find_secondterminator
-     614/    22B6 : 6108                	bsr.s 	VDP_ClearScreen
-     615/    22B8 : 60AA                	bra.s	UpdateStringProperties
-     616/    22BA :                     	
-     617/    22BA :                     ClearScreen_Alt:
-     618/    22BA : 6104                	bsr.s	VDP_ClearScreen
-     619/    22BC : 6000 FF92           	bra.w	WaitNextFrame
-     620/    22C0 :                     	
-     621/    22C0 :                     VDP_ClearScreen:
-     622/    22C0 : (MACRO)[3800]       	dmaFillVRAM $00, PLANEA_ADDR, $776, (a0), (a1)
-     622/    22C0 :                             
-     622/    22C0 : 20BC 940E 93E8              move.l  #dmaCommandLength(2*($776-2)),(a0)
-     622/    22C6 : 20BC 8F01 9780              move.l  #(VDPREG_INCR|1)<<16|(VDPREG_DMASRC_H|$80),(a0) ; VRAM pointer increment: $0001, VRAM fill
-     622/    22CC :                             ; Forcing the low bit of PLANEA_ADDR to be 1, as described before.
-     622/    22CC : 20BC 6001 0083              move.l  #dmaCommand((PLANEA_ADDR)|1,VRAM),(a0)
-     622/    22D2 : 32BC 0000                   move.w  #(($00)<<8)|($00),(a1)
-     622/    22D6 :                     .wait:
-     622/    22D6 : 3410                        move.w  (a0),d2
-     622/    22D8 : 0802 0001                   btst    #1,d2
-     622/    22DC : 66F8                        bne.s   .wait   ; busy loop until the VDP is finished filling
-     622/    22DE : 30BC 8F02                   move.w  #(VDPREG_INCR)|2,(a0) ; VRAM pointer increment back to 2
-     623/    22E2 : 4E75                	rts
-     624/    22E4 :                     
+     609/    22AE :                     .find_terminator:
+     610/    22AE : 4A64                	tst.w	-(a4)				; test until we find the terminator
+     611/    22B0 : 6AFC                	bpl.s	.find_terminator	; terminator is $FFFF so it's negative
+     612/    22B2 :                     .find_secondterminator:
+     613/    22B2 : 4A64                	tst.w	-(a4)				; find the next terminator
+     614/    22B4 : 6AFC                	bpl.s	.find_secondterminator
+     615/    22B6 : 61FE                	bsr.s 	VDP_ClearScreen
+     616/    22B8 : 60AA                	bra.s	UpdateStringProperties
+     617/    22BA :                     	
+     618/    22BA :                     ClearScreen_Alt:
+     619/    22BA : 61FE                	bsr.s	VDP_ClearScreen
+     620/    22BC : 6000 FF92           	bra.w	WaitNextFrame
+     621/    22C0 :                     	
+     622/    22C0 :                     VDP_ClearScreen:
+     623/    22C0 : (MACRO)[3800]       	dmaFillVRAM $00, PLANEA_ADDR, $776, (a0), (a1)
+     623/    22C0 :                             
+     623/    22C0 : 20BC 940E 93E8              move.l  #dmaCommandLength(2*($776-2)),(a0)
+     623/    22C6 : 20BC 8F01 9780              move.l  #(VDPREG_INCR|1)<<16|(VDPREG_DMASRC_H|$80),(a0) ; VRAM pointer increment: $0001, VRAM fill
+     623/    22CC :                             ; Forcing the low bit of PLANEA_ADDR to be 1, as described before.
+     623/    22CC : 20BC 6001 0083              move.l  #dmaCommand((PLANEA_ADDR)|1,VRAM),(a0)
+     623/    22D2 : 32BC 0000                   move.w  #(($00)<<8)|($00),(a1)
+     623/    22D6 :                     .wait:
+     623/    22D6 : 3410                        move.w  (a0),d2
+     623/    22D8 : 0802 0001                   btst    #1,d2
+     623/    22DC : 66F8                        bne.s   .wait   ; busy loop until the VDP is finished filling
+     623/    22DE : 30BC 8F02                   move.w  #(VDPREG_INCR)|2,(a0) ; VRAM pointer increment back to 2
+     624/    22E2 : 4E75                	rts
      625/    22E4 :                     
-     626/    22E4 :                     CPU_CrashSystem:
-     627/    22E4 : 4EF8 02F6           	jmp	ManualCrash
-     628/    22E8 :                     
-     629/    22E8 :                     ROM_End
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 172 - 7/13/2025 17:28:33
+     626/    22E4 :                     
+     627/    22E4 :                     CPU_CrashSystem:
+     628/    22E4 : 4EF8 02F6           	jmp	ManualCrash
+     629/    22E8 :                     
+     630/    22E8 :                     ROM_End
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 172 - 7/13/2025 17:31:55
 
 
   Symbol Table (* = unused):
   --------------------------
 
 *ARCHITECTURE :                                        "i386-unknown-win32" - |
- AddressError :                 214 C | *BlueScreen :                   348 C |
- BusError :                     200 C | *CASESENSITIVE :                  1 - |
- CHKException :                 250 C | *CONSTPI :        3.141592653589793 - |
+*AddressError :                 214 C | *BlueScreen :                   348 C |
+*BusError :                     200 C | *CASESENSITIVE :                  1 - |
+*CHKException :                 250 C | *CONSTPI :        3.141592653589793 - |
 *CPU_ClearScreen :              328 C |  CPU_ClearScreen.clear_screen : 334 C |
- CPU_CrashSystem :             22E4 C | *CPU_Load_BodyFont :            35E C |
+*CPU_CrashSystem :             22E4 C | *CPU_Load_BodyFont :            35E C |
  CPU_Load_BodyFont.load_font :  36C C | *CPU_RegistersDeclaration :    216A C |
  CPU_Wait :                     4E4 C |  CRAM :                    C0000000 - |
 *CRAM_DMA_CMD :            C0000080 - | *CRAM_Load_BodyFontPalette :   21E6 C |
-*CRAM_SIZE :                     80 - |  ClearScreen_Alt :             22BA C |
+*CRAM_SIZE :                     80 - | *ClearScreen_Alt :             22BA C |
  Code0 :                       1CFC C |  Code1 :                       1D07 C |
  Code10 :                      1DB2 C |  Code11 :                      1DC6 C |
  Code12 :                      1DD8 C |  Code13 :                      1DE7 C |
@@ -10765,62 +10769,62 @@
  Code8 :                       1D96 C |  Code9 :                       1DA4 C |
  Codes_End :                   1E01 C |  Continue :                    2278 C |
 *DATE :                 "7/13/2025" - | *DMA_Load_BodyFont :           21D0 C |
- DMA_Load_BodyFont.c :            0 - |  DivisionByZero :               23C C |
- EntryPoint :                  216A C |  FALSE :                          0 - |
+ DMA_Load_BodyFont.c :            0 - | *DivisionByZero :               23C C |
+*EntryPoint :                  216A C |  FALSE :                          0 - |
 *FLOATMAX :      1.797693134866E308 - | *FULLPMMU :                       1 - |
- GenericError :                 2E4 C | *HAS64 :                          1 - |
+*GenericError :                 2E4 C | *HAS64 :                          1 - |
 *HASFPU :                         0 - | *HASPMMU :                        0 - |
 *HFLIP :                        800 - | *HIPRI :                       8000 - |
  HSCROLL_ADDR :                FFFF - | *HVFLIP :                      1800 - |
- Halt_CPU :                     4EE C | *Header_Start :                 100 C |
-*INSUPMODE :                      1 - |  IllegalInstruction :           228 C |
+*Halt_CPU :                     4EE C | *Header_Start :                 100 C |
+*INSUPMODE :                      1 - | *IllegalInstruction :           228 C |
  JOY_B :                          4 - |  JOY_C :                          5 - |
  JOY_CTRL :                  A10009 - |  JOY_D :                          1 - |
  JOY_DATA :                  A10003 - |  JOY_L :                          2 - |
  JOY_R :                          3 - | *JOY_Setup :                   21CC C |
  JOY_U :                          0 - | *LISTON :                         3 - |
-*LOPRI :                          0 - |  Line1010Emu :                  29C C |
- Line1111Emu :                  2AE C | *MACEXP :                         7 - |
+*LOPRI :                          0 - | *Line1010Emu :                  29C C |
+*Line1111Emu :                  2AE C | *MACEXP :                         7 - |
 *MOMCPU :                     68000 - | *MOMCPUNAME :               "68000" - |
  ManualCrash :                  2F6 C |  Message0 :                    1C7B C |
  Message1 :                    1C9D C |  Message2 :                    1CB6 C |
  Message3 :                    1CCF C |  Message4 :                    1CEF C |
- Message5 :                    1E01 C |  Messages :                    212E C |
+*Message5 :                    1E01 C | *Messages :                    212E C |
 *NESTMAX :                      100 - | *NOFLIP :                         0 - |
- NextSlide :                   2296 C |  NextSlide.find_terminator :   229E C |
- NextString :                  225E C | *PADDING :                        1 - |
+*NextSlide :                   2296 C |  NextSlide.find_terminator :   229E C |
+*NextString :                  225E C | *PADDING :                        1 - |
 *PAL0 :                           0 - | *PAL1 :                        2000 - |
 *PAL2 :                        4000 - | *PAL3 :                        6000 - |
  PAT_BodyFont :                 4F4 C |  PAT_BodyFont_SIZE_B :          C00 - |
 *PAT_BodyFont_SIZE_T :           60 - |  PLANEA_ADDR :                 E000 - |
- PLANEB_ADDR :                 FFFF - |  PreviousSlide :               22A6 C |
+ PLANEB_ADDR :                 FFFF - | *PreviousSlide :               22A6 C |
  PreviousSlide.find_secondterminator :                                 22B2 C |
  PreviousSlide.find_terminator :                                       22AE C |
-*PrintErrorCode :               3A8 C |  PrintErrorCode.continue :      3BA C |
+*PrintErrorCode :               3A8 C | *PrintErrorCode.continue :      3BA C |
 *PrintMessages :                372 C |  PrintMessages.setup_message :  37C C |
-*PrintRegisterDump :            3F0 C |  PrintRegisterDump.continue :   45E C |
+*PrintRegisterDump :            3F0 C | *PrintRegisterDump.continue :   45E C |
 *PrintRegisterDump.print_address_registers :                            480 C |
 *PrintRegisterDump.print_message :                                      3F0 C |
  PrintRegisterDump.print_prefix :                                       438 C |
  PrintRegisterDump.print_registers :                                    434 C |
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 173 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 173 - 7/13/2025 17:31:55
 
 
- PrintRegisterDump.print_sp :   4A2 C |  PrintRegisterDump.print_sr :   4B8 C |
+*PrintRegisterDump.print_sp :   4A2 C | *PrintRegisterDump.print_sr :   4B8 C |
  PrintRegisterDump.print_value :                                        44E C |
-*PrintTextCode :                3C4 C |  PrivilegeViolation :           278 C |
+*PrintTextCode :                3C4 C | *PrivilegeViolation :           278 C |
  REG_DUMP :                  FF0000 - |  REG_PREFIXES :              FF0042 - |
-*RELAXED :                        0 - |  ROM_End :                     22E8 C |
+*RELAXED :                        0 - | *ROM_End :                     22E8 C |
  ROM_Start :                      0 C |  ReadJoypad :                  2218 C |
- RedrawSlide :                 2256 C |  RedrawSlide.find_terminator : 2256 C |
+*RedrawSlide :                 2256 C |  RedrawSlide.find_terminator : 2256 C |
  SPRITE_ADDR :                 FFFF - |  STR_Properties :              1E10 C |
 *STR_Strings :                 10F4 C |  SYS_STACK :                      0 - |
- SkipTerminator :              2290 C |  Slide0 :                      1E10 C |
+*SkipTerminator :              2290 C |  Slide0 :                      1E10 C |
 *Slide1 :                      1E4E C | *Slide2 :                      1E92 C |
 *Slide3 :                      1F06 C | *Slide4 :                      1F6E C |
 *Slide5 :                      1FCA C | *Slide6 :                      2074 C |
 *Slide7 :                      2118 C |  Slide8 :                      2126 C |
- SpuriousException :            2C0 C |  String0 :                     10F4 C |
+*SpuriousException :            2C0 C |  String0 :                     10F4 C |
  String1 :                     1114 C |  String10 :                    1227 C |
  String100 :                   199F C |  String101 :                   19BA C |
  String102 :                   19E2 C |  String103 :                   19FD C |
@@ -10866,7 +10870,7 @@
  String59 :                    1693 C |  String6 :                     11AC C |
  String60 :                    16B4 C |  String61 :                    16BA C |
  String62 :                    16D8 C |  String63 :                    16EA C |
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 174 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 174 - 7/13/2025 17:31:55
 
 
  String64 :                    16F0 C |  String65 :                    170C C |
@@ -10889,12 +10893,12 @@
  String95 :                    193B C |  String96 :                    195C C |
  String97 :                    1969 C |  String98 :                    197A C |
  String99 :                    198B C | *Strings :                     10F4 C |
-*Strings_End :                 1E10 C | *TIME :                  "17:28:33" - |
- TRACEException :               28A C |  TRAPVException :               264 C |
+*Strings_End :                 1E10 C | *TIME :                  "17:31:55" - |
+*TRACEException :               28A C | *TRAPVException :               264 C |
 *TRAPxxException :              2D2 C | *TRUE :                           1 - |
- TextCodes :                   214C C | *UpdateDisplay :               227E C |
+*TextCodes :                   214C C | *UpdateDisplay :               227E C |
  UpdateDisplay.print_text :    2280 C |  UpdateStringProperties :      2264 C |
- UpdateStringProperties.continue :                                     226E C |
+*UpdateStringProperties.continue :                                     226E C |
  VDPREG_BGCOL :                8700 - |  VDPREG_DMALEN_H :             9400 - |
 *VDPREG_DMALEN_L :             9300 - |  VDPREG_DMASRC_H :             9700 - |
 *VDPREG_DMASRC_L :             9500 - |  VDPREG_DMASRC_M :             9600 - |
@@ -10905,11 +10909,11 @@
  VDPREG_PLANEB :               8400 - |  VDPREG_SIZE :                 9000 - |
  VDPREG_SPRITE :               8500 - |  VDPREG_WINDOW :               8300 - |
  VDPREG_WINX :                 9100 - |  VDPREG_WINY :                 9200 - |
- VDP_BSOD :                     306 C |  VDP_CTRL :                  C00004 - |
- VDP_ClearScreen :             22C0 C |  VDP_DATA :                  C00000 - |
-*VDP_HVCOUNTER :             C00008 - |  VDP_PrintText :                4D4 C |
+*VDP_BSOD :                     306 C |  VDP_CTRL :                  C00004 - |
+*VDP_ClearScreen :             22C0 C |  VDP_DATA :                  C00000 - |
+*VDP_HVCOUNTER :             C00008 - | *VDP_PrintText :                4D4 C |
  VDP_PrintText.update_display : 4D6 C | *VDP_Setup :                   218E C |
- VDP_VBlankInt :                4F2 C | *VERSION :                     142F - |
+*VDP_VBlankInt :                4F2 C | *VERSION :                     142F - |
 *VFLIP :                       1000 - |  VRAM :                    40000000 - |
 *VRAM_DMA_CMD :            40000080 - | *VRAM_SIZE :                  10000 - |
 *VSRAM :                   40000010 - | *VSRAM_DMA_CMD :           40000090 - |
@@ -10921,9 +10925,9 @@
  i :                              F - |
 
     324 symbols
-     74 unused symbols
+    108 unused symbols
 
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 175 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 175 - 7/13/2025 17:31:55
 
 
   Defined Macros:
@@ -10939,7 +10943,7 @@ vdpSetVideoSpace                      |
 
      13 macros
 
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 176 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 176 - 7/13/2025 17:31:55
 
 
   Defined Functions:
@@ -10951,7 +10955,7 @@ dmaLength                             | dmaSource
 dmaCommand                            | vdpCommand                           
 char                                  | chars                                
 
- AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 177 - 7/13/2025 17:28:33
+ AS V1.42 Beta [Bld 290] - Source File Sonic.asm - Page 177 - 7/13/2025 17:31:55
 
 
   Code Pages:
@@ -10961,10 +10965,12 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.14 seconds assembly time
+0.07 seconds assembly time
 
-   2293 lines source file
-  10256 lines incl. macro expansions
-      2 passes
-      0 errors
+   2294 lines source file
+  10257 lines incl. macro expansions
+      1 pass
+        Additional necessary passes not started due to
+        errors, listing possibly incorrect.
+      1 error
       0 warnings
