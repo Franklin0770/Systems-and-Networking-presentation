@@ -10,7 +10,7 @@
 
 	org 0
 	
-ROM_Start:																	; Error codes ($AAxx)
+ROM_Start																	; Error codes ($AAxx)
 Vectors:
 		dc.l SYS_STACK			; Initial stack pointer value (SP value)
 		dc.l EntryPoint			; Start of program (PC value)
@@ -626,4 +626,4 @@ VDP_ClearScreen:
 CPU_CrashSystem:
 	jmp	ManualCrash
 
-ROM_End:
+ROM_End
