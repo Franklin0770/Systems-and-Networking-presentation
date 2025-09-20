@@ -1,7 +1,3 @@
-	cpu 68000
-	
-	supmode on	; We don't need warnings about privileged instructions
-
 	listing purecode
 	
 	;include "ComplierMacros.asm" unused
