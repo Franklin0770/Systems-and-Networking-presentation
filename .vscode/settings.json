@@ -20,5 +20,6 @@
 		"assets"
 	],
 	"megaenvironment.sourceCodeControl.variablesFileName": "",
-	"workbench.colorTheme": "MegaEnvironment Dark"
+	"workbench.colorTheme": "MegaEnvironment Dark",
+	"megaenvironment.sourceCodeControl.mainFileName": "Sonic.asm"
 }
