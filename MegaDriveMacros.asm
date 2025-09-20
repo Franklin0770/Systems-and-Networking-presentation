@@ -154,7 +154,7 @@ vdpCoordinates function x,y,vdpCommand((PLANEA_ADDR)|(y*($40*2)+x*2),VRAM)
 
 	
 VRAMCoordinates: macro x, y
-address set (PLANEA_ADDR)|(y*($40*2)+x*2)
+address set (PLANEA_ADDR)|(y*(64*2)+x*2)	; 64 tiles in height, 64*2 bytes (64 words). For the x, x*2 (to bytes)
 	dc.l	((address&$3FFF)<<16)|((address&$C000)>>14)|(VRAM)
 	endm
 

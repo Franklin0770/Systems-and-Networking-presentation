@@ -1,4 +1,4 @@
-; Sintax: string address in ROM, position on screen (x,y)
+; Syntax: string address in ROM, position on screen (x,y)
 
 ; ------------------------
 ; Presentation strings
